@@ -1,0 +1,66 @@
+{% block render_children_nodes %}
+    {% if currentNode.getChildren()|length > 0 %}
+        {% set activeChild = currentNode.getFirstActiveChild() %}
+
+        <ul{{ block('render_list_attr') }}>
+            {% for child in currentNode.getChildren() %}
+                {% set currentNode = child %}
+                {{ block('render_node') }}
+            {% endfor %}
+        </ul>
+
+        {% if not nested and (activeChild or not collapse) %}
+            {% set currentNode = activeChild %}
+            {{ block('render_children_nodes') }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block render_node %}
+    <li{{ block('render_item_attr') }}>
+        {{ block('render_item_inner') }}
+        {% if nested and (currentNode.isActive() or not collapse) %}
+            {{ block('render_children_nodes') }}
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block render_root %}
+    {{ block('render_children_nodes') }}
+{% endblock %}
+
+{% block render_list_attr %}
+    class="menu menu-layer-{{ currentNode.getLayer() + 1 }}"
+{% endblock %}
+
+{% block render_item_attr %}
+    {% set classes = ['menu-item'] %}
+
+    {% if currentNode.isActive() %}
+        {% set classes = classes|merge(['menu-item-active']) %}
+    {% endif %}
+     {% if currentNode.isFirstChild() %}
+        {% set classes = classes|merge(['menu-item-first']) %}
+    {% endif %}
+
+    {% set finalClasses = classes|merge(currentNode.getAttrs()['class']|default('')|split(' ')) %}
+    {% set viewAttributes = currentNode.getAttrs()|merge({'class':finalClasses|join(' ')}) %}
+
+    {%- for key, val in viewAttributes -%}
+        {{- " " -}}{{- key }}="{{ val }}"
+    {%- endfor -%}
+{% endblock %}
+
+{% block render_label %}
+    {{ currentNode.getLabel()|trans }}
+{% endblock %}
+
+{% block render_item_inner %}
+    {% set url = "" %}
+    {% if currentNode.hasRoute() %}
+        {% set url = path(currentNode.getRoute(), currentNode.getRouteParams()) %}
+    {% elseif currentNode.hasUrl() %}
+        {% set url = currentNode.getUrl() %}
+    {% endif %}
+    <a href="{{ url }}">{{ block('render_label') }}</a>
+{% endblock %}

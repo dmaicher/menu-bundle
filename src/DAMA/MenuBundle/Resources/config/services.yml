@@ -1,0 +1,46 @@
+parameters:
+  dama_menu.twig.menu_extension.class: DAMA\MenuBundle\Twig\MenuExtension
+  dama_menu.node_factory.class: DAMA\MenuBundle\Node\NodeFactory
+  dama_menu.menu_factory.class: DAMA\MenuBundle\Menu\MenuFactory
+  dama_menu.menu_config_provider.class: DAMA\MenuBundle\MenuConfig\MenuConfigProvider
+  dama_menu.menu_tree_traverser.class: DAMA\MenuBundle\MenuTree\MenuTreeTraverser
+  dama_menu.node_visitor.filter.class: DAMA\MenuBundle\NodeVisitor\NodeFilter
+  dama_menu.node_visitor.activator.class: DAMA\MenuBundle\NodeVisitor\NodeActivator
+  dama_menu.node_visitor.node_route_propagator.class: DAMA\MenuBundle\NodeVisitor\NodeRoutePropagator
+
+services:
+  dama_menu.twig.menu_extension:
+    class: "%dama_menu.twig.menu_extension.class%"
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
+  dama_menu.node_factory:
+    class: "%dama_menu.node_factory.class%"
+
+  dama_menu.menu_factory:
+    class: "%dama_menu.menu_factory.class%"
+    arguments: ["@dama_menu.menu_config_provider", "@dama_menu.menu_tree_traverser"]
+
+  dama_menu.menu_config_provider:
+    class: "%dama_menu.menu_config_provider.class%"
+
+  dama_menu.menu_tree_traverser:
+    class: "%dama_menu.menu_tree_traverser.class%"
+
+  dama_menu.node_visitor.filter:
+    class: "%dama_menu.node_visitor.filter.class%"
+    arguments: ["@security.token_storage", "@security.authorization_checker"]
+    tags:
+      - { name: dama_menu.node_visitor, priority: 1 }
+
+  dama_menu.node_visitor.activator:
+    class: "%dama_menu.node_visitor.activator.class%"
+    arguments: ["@request_stack"]
+    tags:
+      - { name: dama_menu.node_visitor, priority: 2 }
+
+  dama_menu.node_visitor.node_route_propagator:
+      class: "%dama_menu.node_visitor.node_route_propagator.class%"
+      tags:
+        - { name: dama_menu.node_visitor, priority: 3 }
