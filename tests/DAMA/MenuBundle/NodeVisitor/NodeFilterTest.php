@@ -5,6 +5,7 @@ namespace DAMA\MenuBundle\Tests\NodeVisitor;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -86,6 +87,7 @@ class NodeFilterTest extends \PHPUnit_Framework_TestCase
             array(array('FOO'), true, true, false),
             array(array('FOO'), true, false, true),
             array(array('FOO'), false, true, true),
+            array(array(new Expression('something')), false, true, true),
         );
     }
 }
