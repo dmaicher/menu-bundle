@@ -23,7 +23,7 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'dama_menu_render' => new \Twig_Function_Method($this, 'render', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('dama_menu_render', array($this, 'render'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('dama_menu_section_label', array($this, 'getMenuSectionLabel')),
             new \Twig_SimpleFunction('dama_menu_first_active_child', array($this, 'getFirstActiveChild')),
         );
