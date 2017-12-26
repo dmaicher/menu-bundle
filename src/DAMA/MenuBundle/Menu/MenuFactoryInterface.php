@@ -2,14 +2,12 @@
 
 namespace DAMA\MenuBundle\Menu;
 
-use DAMA\MenuBundle\Node\Node;
-
 interface MenuFactoryInterface
 {
     /**
      * @param $name
      *
-     * @return Node
+     * @return Menu
      */
     public function create($name);
 }

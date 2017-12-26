@@ -1,10 +1,7 @@
 services:
   dama_menu.twig.menu_extension:
     class: DAMA\MenuBundle\Twig\MenuExtension
-    arguments:
-      - "@twig"
-      - "@dama_menu.menu_factory"
-      - "@dama_menu.menu_config_provider"
+    arguments: ["@service_container"]
     tags:
       - { name: twig.extension }
 

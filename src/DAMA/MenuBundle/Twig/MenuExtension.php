@@ -2,35 +2,19 @@
 
 namespace DAMA\MenuBundle\Twig;
 
-use DAMA\MenuBundle\Menu\MenuFactoryInterface;
-use DAMA\MenuBundle\MenuConfig\MenuConfigProvider;
 use DAMA\MenuBundle\Node\Node;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class MenuExtension extends \Twig_Extension
 {
     /**
-     * @var MenuFactoryInterface
+     * @var ContainerInterface
      */
-    private $menuFactory;
+    private $container;
 
-    /**
-     * @var MenuConfigProvider
-     */
-    private $configProvider;
-
-    /**
-     * @var \Twig_Environment
-     */
-    private $twig;
-
-    public function __construct(
-        \Twig_Environment $twig,
-        MenuFactoryInterface $menuFactory,
-        MenuConfigProvider $configProvider
-    ) {
-        $this->menuFactory = $menuFactory;
-        $this->configProvider = $configProvider;
-        $this->twig = $twig;
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
     /**
@@ -47,16 +31,13 @@ class MenuExtension extends \Twig_Extension
 
     /**
      * @param string $name
-     * @param array  $options
+     * @param array $options
      *
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Syntax
-     * @throws \Twig_Error_Runtime
      */
     public function render($name, array $options = array())
     {
-        $menu = $this->menuFactory->create($name);
+        $menu = $this->container->get('dama_menu.menu_factory')->create($name);
 
         $defaultOptions = array(
             'collapse' => false,
@@ -88,7 +69,7 @@ class MenuExtension extends \Twig_Extension
      */
     public function getFirstActiveChild($name)
     {
-        $menu = $this->menuFactory->create($name);
+        $menu = $this->container->get('dama_menu.menu_factory')->create($name);
 
         return $menu ? $menu->getFirstActiveChild() : null;
     }
@@ -97,15 +78,12 @@ class MenuExtension extends \Twig_Extension
      * @param string $name
      *
      * @return \Twig_Template
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     protected function getTemplate($name)
     {
-        $menuConfig = $this->configProvider->getMenuConfig($name);
+        $menuConfig = $this->container->get('dama_menu.menu_config_provider')->getMenuConfig($name);
 
-        return $this->twig->loadTemplate($menuConfig['twig_template']);
+        return $this->container->get('twig')->loadTemplate($menuConfig['twig_template']);
     }
 
     /**
