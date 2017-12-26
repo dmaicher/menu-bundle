@@ -11,9 +11,11 @@ services:
   dama_menu.menu_factory:
     class: DAMA\MenuBundle\Menu\MenuFactory
     arguments: ["@dama_menu.menu_config_provider", "@dama_menu.menu_tree_traverser"]
+    public: true
 
   dama_menu.menu_config_provider:
     class: DAMA\MenuBundle\MenuConfig\MenuConfigProvider
+    public: true
 
   dama_menu.menu_tree_traverser:
     class: DAMA\MenuBundle\MenuTree\MenuTreeTraverser
