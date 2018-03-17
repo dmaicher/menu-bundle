@@ -1,13 +1,14 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\MenuTree;
+namespace Tests\MenuTree;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverser;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeVisitorInterface;
+use PHPUnit\Framework\TestCase;
 
-class MenuTreeTraverserTest extends \PHPUnit_Framework_TestCase
+class MenuTreeTraverserTest extends TestCase
 {
     /**
      * @var MenuTreeTraverser

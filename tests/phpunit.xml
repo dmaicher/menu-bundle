@@ -1,4 +1,8 @@
 <phpunit bootstrap="./../vendor/autoload.php" colors="true">
+    <php>
+        <env name="KERNEL_CLASS" value="Tests\Functional\AppKernel" />
+    </php>
+
     <testsuites>
         <testsuite name="DMMenuBundle test suite">
             <directory suffix="Test.php">./Tests</directory>

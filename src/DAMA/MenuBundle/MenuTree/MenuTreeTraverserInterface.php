@@ -11,10 +11,5 @@ interface MenuTreeTraverserInterface
      */
     const STOP_TRAVERSAL = 0;
 
-    /**
-     * @param Node $root
-     *
-     * @return mixed
-     */
-    public function traverse(Node $node);
+    public function traverse(Node $node): void;
 }

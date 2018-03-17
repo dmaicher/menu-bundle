@@ -8,16 +8,11 @@ use DAMA\MenuBundle\NodeVisitor\NodeVisitorInterface;
 class MenuTreeTraverser implements MenuTreeTraverserInterface
 {
     /**
-     * @var array
+     * @var NodeVisitorInterface[]
      */
-    protected $visitors = array();
+    protected $visitors = [];
 
-    /**
-     * @param Node $node
-     *
-     * @return mixed|void
-     */
-    public function traverse(Node $node)
+    public function traverse(Node $node): void
     {
         if (!$node->isRootNode()) {
             foreach ($this->visitors as $visitor) {

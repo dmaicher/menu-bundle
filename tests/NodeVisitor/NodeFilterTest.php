@@ -1,15 +1,16 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\NodeVisitor;
+namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class NodeFilterTest extends \PHPUnit_Framework_TestCase
+class NodeFilterTest extends TestCase
 {
     /**
      * @var NodeFilter

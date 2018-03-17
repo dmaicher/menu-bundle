@@ -1,0 +1,20 @@
+dama_menu:
+    menues:
+        test_menu:
+            tree_builder: Tests\Functional\TestMenuTreeBuilder
+
+parameters:
+    kernel.secret: foo
+
+framework:
+    router: { resource: "%kernel.root_dir%/routing.yml" }
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+security:
+    providers:
+        in_memory: { memory: ~ }
+    firewalls:
+        main:
+            anonymous: ~

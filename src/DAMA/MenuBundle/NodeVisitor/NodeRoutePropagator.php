@@ -10,9 +10,7 @@ use DAMA\MenuBundle\Node\Node;
 class NodeRoutePropagator implements NodeVisitorInterface
 {
     /**
-     * @param Node $node
-     *
-     * @return mixed|void
+     * @inheritdoc
      */
     public function visit(Node $node)
     {

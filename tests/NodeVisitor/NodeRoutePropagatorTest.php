@@ -1,12 +1,13 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\NodeVisitor;
+namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeActivator;
 use DAMA\MenuBundle\NodeVisitor\NodeRoutePropagator;
+use PHPUnit\Framework\TestCase;
 
-class NodeRoutePropagatorTest extends \PHPUnit_Framework_TestCase
+class NodeRoutePropagatorTest extends TestCase
 {
     /**
      * @var NodeActivator

@@ -1,10 +1,11 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\MenuConfig;
+namespace Tests\MenuConfig;
 
 use DAMA\MenuBundle\MenuConfig\MenuConfigProvider;
+use PHPUnit\Framework\TestCase;
 
-class MenuConfigProviderTest extends \PHPUnit_Framework_TestCase
+class MenuConfigProviderTest extends TestCase
 {
     public function testAddMenuDefinitionAndGetMenuDefinition()
     {
@@ -16,7 +17,7 @@ class MenuConfigProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testGetMenuDefinitionThrowsException()
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\NodeVisitor;
+namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeActivator;
-use Symfony\Component\HttpFoundation\Request;
+use PHPUnit\Framework\TestCase;
 
-class NodeActivatorTest extends \PHPUnit_Framework_TestCase
+class NodeActivatorTest extends TestCase
 {
     /**
      * @var Node

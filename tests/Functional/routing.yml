@@ -1,0 +1,6 @@
+test:
+    path: /
+    controller: 'FrameworkBundle:Template:template'
+    defaults:
+        template: test_menu.html.twig
+

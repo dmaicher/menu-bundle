@@ -1,28 +1,32 @@
 {% block render_children_nodes %}
-    {% if currentNode.getChildren()|length > 0 %}
-        {% set activeChild = currentNode.getFirstActiveChild() %}
+    {% spaceless %}
+        {% if currentNode.getChildren()|length > 0 %}
+            {% set activeChild = currentNode.getFirstActiveChild() %}
 
-        <ul{{ block('render_list_attr') }}>
-            {% for child in currentNode.getChildren() %}
-                {% set currentNode = child %}
-                {{ block('render_node') }}
-            {% endfor %}
-        </ul>
+            <ul{{- block('render_list_attr') -}}>
+                {% for child in currentNode.getChildren() %}
+                    {% set currentNode = child %}
+                    {{- block('render_node') -}}
+                {% endfor %}
+            </ul>
 
-        {% if not nested and (activeChild or not collapse) %}
-            {% set currentNode = activeChild %}
-            {{ block('render_children_nodes') }}
+            {% if not nested and (activeChild or not collapse) %}
+                {% set currentNode = activeChild %}
+                {{ block('render_children_nodes') }}
+            {% endif %}
         {% endif %}
-    {% endif %}
+    {% endspaceless %}
 {% endblock %}
 
 {% block render_node %}
-    <li{{ block('render_item_attr') }}>
-        {{ block('render_item_inner') }}
-        {% if nested and (currentNode.isActive() or not collapse) %}
-            {{ block('render_children_nodes') }}
-        {% endif %}
-    </li>
+    {% spaceless %}
+        <li{{ block('render_item_attr') }}>
+            {{ block('render_item_inner') }}
+            {% if nested and (currentNode.isActive() or not collapse) %}
+                {{ block('render_children_nodes') }}
+            {% endif %}
+        </li>
+    {% endspaceless %}
 {% endblock %}
 
 {% block render_root %}
@@ -47,20 +51,22 @@
     {% set viewAttributes = currentNode.getAttrs()|merge({'class':finalClasses|join(' ')}) %}
 
     {%- for key, val in viewAttributes -%}
-        {{- " " -}}{{- key }}="{{ val }}"
+        {{- " " -}}{{- key }}="{{ val|trim }}"
     {%- endfor -%}
 {% endblock %}
 
 {% block render_label %}
-    {{ currentNode.getLabel()|trans }}
+    {{- currentNode.getLabel()|trans -}}
 {% endblock %}
 
 {% block render_item_inner %}
-    {% set url = "" %}
-    {% if currentNode.hasRoute() %}
-        {% set url = path(currentNode.getRoute(), currentNode.getRouteParams()) %}
-    {% elseif currentNode.hasUrl() %}
-        {% set url = currentNode.getUrl() %}
-    {% endif %}
-    <a href="{{ url }}">{{ block('render_label') }}</a>
+    {% spaceless %}
+        {% set url = "" %}
+        {% if currentNode.hasRoute() %}
+            {% set url = path(currentNode.getRoute(), currentNode.getRouteParams()) %}
+        {% elseif currentNode.hasUrl() %}
+            {% set url = currentNode.getUrl() %}
+        {% endif %}
+        <a href="{{ url }}">{{ block('render_label') }}</a>
+    {% endspaceless %}
 {% endblock %}
