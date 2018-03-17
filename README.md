@@ -41,7 +41,7 @@ Step 2: add config for your menu
 dama_menu:
     menues:
         your_namespace.main_menu:
-            tree_builder: Your\Namespace\MainMenuTreeBuilder
+            tree_builder: Your\Namespace\MainMenuTreeBuilder #service ID OR FQCN and no constructor args
             twig_template: YourNamespace:main_menu.html.twig #optional
 ```
 
