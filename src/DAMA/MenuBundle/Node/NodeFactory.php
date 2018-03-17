@@ -4,12 +4,7 @@ namespace DAMA\MenuBundle\Node;
 
 class NodeFactory implements NodeFactoryInterface
 {
-    /**
-     * @param $label
-     *
-     * @return Node
-     */
-    public function create($label = null)
+    public function create(?string $label = null): Node
     {
         $node = new Node($label);
         $node->setNodeFactory($this);

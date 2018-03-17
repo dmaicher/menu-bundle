@@ -2,3 +2,5 @@
 composer.lock
 composer.phar
 vendor
+tests/Functional/cache
+tests/Functional/logs

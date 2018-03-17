@@ -21,9 +21,7 @@ class NodeActivator implements NodeVisitorInterface
     }
 
     /**
-     * @param Node $node
-     *
-     * @return mixed|void
+     * @inheritdoc
      */
     public function visit(Node $node)
     {

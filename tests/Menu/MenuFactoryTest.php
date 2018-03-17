@@ -1,6 +1,6 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\Menu;
+namespace Tests\Menu;
 
 use DAMA\MenuBundle\Menu\MenuFactory;
 use DAMA\MenuBundle\MenuConfig\MenuConfigProvider;
@@ -8,8 +8,9 @@ use DAMA\MenuBundle\MenuTree\MenuTreeBuilderInterface;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\Node\NodeFactoryInterface;
+use PHPUnit\Framework\TestCase;
 
-class MenuFactoryTest extends \PHPUnit_Framework_TestCase
+class MenuFactoryTest extends TestCase
 {
     protected $nodeFactory;
 

@@ -31,9 +31,7 @@ class NodeFilter implements NodeVisitorInterface
     }
 
     /**
-     * @param Node $node
-     *
-     * @return int|null
+     * @inheritdoc
      */
     public function visit(Node $node)
     {

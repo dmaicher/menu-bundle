@@ -1,10 +1,11 @@
 <?php
 
-namespace DAMA\MenuBundle\Tests\Node;
+namespace Tests\Node;
 
 use DAMA\MenuBundle\Node\Node;
+use PHPUnit\Framework\TestCase;
 
-class NodeTest extends \PHPUnit_Framework_TestCase
+class NodeTest extends TestCase
 {
     public function testAddChild()
     {

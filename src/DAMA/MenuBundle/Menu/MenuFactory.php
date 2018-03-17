@@ -23,12 +23,8 @@ class MenuFactory implements MenuFactoryInterface
     /**
      * @var array
      */
-    protected $cache = array();
+    protected $cache = [];
 
-    /**
-     * @param MenuConfigProvider         $menuConfigProvider
-     * @param MenuTreeTraverserInterface $menuTreeTraverser
-     */
     public function __construct(MenuConfigProvider $menuConfigProvider, MenuTreeTraverserInterface $menuTreeTraverser)
     {
         $this->menuConfigProvider = $menuConfigProvider;
@@ -36,13 +32,9 @@ class MenuFactory implements MenuFactoryInterface
     }
 
     /**
-     * @param $name
-     *
-     * @return Node
-     *
      * @throws \InvalidArgumentException
      */
-    public function create($name)
+    public function create(string $name): Node
     {
         //already created for this request?
         if (isset($this->cache[$name])) {
@@ -61,13 +53,7 @@ class MenuFactory implements MenuFactoryInterface
         return $root;
     }
 
-    /**
-     * @param NodeFactoryInterface     $nodeFactory
-     * @param MenuTreeBuilderInterface $menuTreeBuilder
-     *
-     * @return Node
-     */
-    protected function getRootNode(NodeFactoryInterface $nodeFactory, MenuTreeBuilderInterface $menuTreeBuilder)
+    protected function getRootNode(NodeFactoryInterface $nodeFactory, MenuTreeBuilderInterface $menuTreeBuilder): Node
     {
         $root = $nodeFactory->create(null);
         $menuTreeBuilder->build($root);

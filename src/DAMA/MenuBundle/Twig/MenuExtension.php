@@ -29,13 +29,7 @@ class MenuExtension extends \Twig_Extension
         );
     }
 
-    /**
-     * @param string $name
-     * @param array $options
-     *
-     * @return string
-     */
-    public function render($name, array $options = array())
+    public function render(string $name, array $options = array()): string
     {
         $menu = $this->container->get('dama_menu.menu_factory')->create($name);
 
@@ -50,36 +44,21 @@ class MenuExtension extends \Twig_Extension
         return $this->getTemplate($name)->renderBlock('render_root', $finalOptions);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    public function getMenuSectionLabel($name)
+    public function getMenuSectionLabel(string $name): ?string
     {
         $activeChild = $this->getFirstActiveChild($name);
 
         return null === $activeChild ? '' : $activeChild->getLabel();
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Node
-     */
-    public function getFirstActiveChild($name)
+    public function getFirstActiveChild(string $name): ?Node
     {
         $menu = $this->container->get('dama_menu.menu_factory')->create($name);
 
         return $menu ? $menu->getFirstActiveChild() : null;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Twig_Template
-     */
-    protected function getTemplate($name)
+    protected function getTemplate(string $name): \Twig_Template
     {
         $menuConfig = $this->container->get('dama_menu.menu_config_provider')->getMenuConfig($name);
 
