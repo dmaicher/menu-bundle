@@ -6,10 +6,11 @@ php:
 
 env:
   - SYMFONY_VERSION="3.4.*"
-  - SYMFONY_VERSION="4.0.*"
+  - SYMFONY_VERSION="4.2.*"
 
 install:
   - curl -s https://getcomposer.org/installer | php
+  - rm -rf vendor/* composer.lock
   - php composer.phar require symfony/symfony:${SYMFONY_VERSION}
 
 script: make test
