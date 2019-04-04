@@ -39,6 +39,6 @@ class MenuTreeTraverserTest extends WebTestCase
 
     private function getMenuFactory(): MenuFactoryInterface
     {
-        return self::$container->get('dama_menu.menu_factory');
+        return $this->container->get('dama_menu.menu_factory');
     }
 }
