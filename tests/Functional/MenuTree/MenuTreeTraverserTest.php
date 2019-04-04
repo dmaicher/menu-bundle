@@ -18,7 +18,7 @@ class MenuTreeTraverserTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->webClient = static::createClient();
+        $this->webClient = $this->createClient();
     }
 
     public function testMenu(): void

@@ -8,7 +8,7 @@ class FunctionalTest extends WebTestCase
 {
     public function testRenderMenuOne(): void
     {
-        $client = static::createClient();
+        $client = $this->createClient();
         $crawler = $client->request('GET', '/');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
