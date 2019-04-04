@@ -4,11 +4,10 @@ namespace Tests\Functional;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeBuilderInterface;
 use DAMA\MenuBundle\Node\Node;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 class TestMenuTreeBuilder implements MenuTreeBuilderInterface
 {
-    public function build(Node $root)
+    public function build(Node $root): void
     {
         $root
             ->child('bla')
@@ -20,6 +19,16 @@ class TestMenuTreeBuilder implements MenuTreeBuilderInterface
                 ->setRoute('test')
                 ->child('foo-child')
                     ->setAttr('class', 'foo-child-class')
+                ->end()
+            ->end()
+            ->child('bar')
+                ->setAdditionalActiveRoutes(['test_1', 'test_2'])
+                ->child('bar-sub-1')
+                    ->setRoute('test_1')
+                    ->setRequiredPermissions(['IS_AUTHENTICATED_FULLY'])
+                ->end()
+                ->child('bar-sub-2')
+                    ->setRoute('test_2')
                 ->end()
             ->end()
         ;
