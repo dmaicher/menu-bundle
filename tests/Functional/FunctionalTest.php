@@ -18,5 +18,8 @@ class FunctionalTest extends WebTestCase
         $this->assertCount(4, $crawler->filter('li.menu-item'));
         $this->assertCount(0, $crawler->filter('li.bla-class'));
         $this->assertCount(1, $crawler->filter('li.foo-child-class'));
+
+        $this->assertCount(2, $crawler->filter('a[href="/test_2"]'));
+        $this->assertCount(0, $crawler->filter('a[href="/test_1"]'));
     }
 }
