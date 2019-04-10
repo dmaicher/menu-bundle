@@ -27,7 +27,7 @@ services:
     class: DAMA\MenuBundle\NodeVisitor\NodeFilter
     arguments: ["@security.token_storage", "@security.authorization_checker"]
     tags:
-      - { name: dama_menu.node_visitor, priority: 1 }
+      - { name: dama_menu.node_visitor, priority: 3 }
 
   dama_menu.node_visitor.activator:
     class: DAMA\MenuBundle\NodeVisitor\NodeActivator
@@ -38,4 +38,4 @@ services:
   dama_menu.node_visitor.node_route_propagator:
       class: DAMA\MenuBundle\NodeVisitor\NodeRoutePropagator
       tags:
-        - { name: dama_menu.node_visitor, priority: 3 }
+        - { name: dama_menu.node_visitor, priority: 1 }

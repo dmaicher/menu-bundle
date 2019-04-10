@@ -30,7 +30,7 @@ class MenuTreeTraverserTest extends TestCase
         $this->traverser->addVisitor($this->visitors[1]);
     }
 
-    public function testTraverseCallsVisitOnEachVisitor()
+    public function testTraverseCallsVisitOnEachVisitor(): void
     {
         $root = new Node();
         $child = new Node();
@@ -43,7 +43,7 @@ class MenuTreeTraverserTest extends TestCase
         $this->traverser->traverse($root);
     }
 
-    public function testStopTraversal()
+    public function testStopTraversal(): void
     {
         $root = new Node();
         $child = new Node();
@@ -64,7 +64,7 @@ class MenuTreeTraverserTest extends TestCase
         $this->traverser->traverse($root);
     }
 
-    public function testTraverseRecursively()
+    public function testTraverseRecursively(): void
     {
         $root = new Node();
         $child = new Node();
