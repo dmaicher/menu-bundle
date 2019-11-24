@@ -24,7 +24,7 @@ class NodeRoutePropagatorTest extends TestCase
      */
     protected $parent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->propagator = new NodeRoutePropagator();
         $this->node = new Node();

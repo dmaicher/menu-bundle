@@ -5,6 +5,7 @@ namespace Tests\NodeVisitor;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -33,11 +34,11 @@ class NodeFilterTest extends TestCase
     private $node;
 
     /**
-     * @var Node|\PHPUnit_Framework_MockObject_MockObject
+     * @var Node|MockObject
      */
     private $parent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
         $this->authChecker = $this->createMock(AuthorizationCheckerInterface::class);

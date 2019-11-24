@@ -1,6 +1,7 @@
 <phpunit bootstrap="./../vendor/autoload.php" colors="true">
     <php>
         <env name="KERNEL_CLASS" value="Tests\Functional\AppKernel" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[direct]=99&amp;max[self]=99" />
     </php>
 
     <testsuites>
@@ -18,4 +19,8 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
 </phpunit>

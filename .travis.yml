@@ -1,16 +1,17 @@
 language: php
 
 php:
-  - '7.1'
   - '7.2'
+  - '7.3'
 
 env:
-  - SYMFONY_VERSION="3.4.*"
-  - SYMFONY_VERSION="4.2.*"
+  - SYMFONY_REQUIRE="3.4.*"
+  - SYMFONY_REQUIRE="4.4.*"
+  - SYMFONY_REQUIRE="5.0.*"
 
 install:
-  - curl -s https://getcomposer.org/installer | php
+  - composer global require --no-progress --no-scripts --no-plugins symfony/flex
   - rm -rf vendor/* composer.lock
-  - php composer.phar require symfony/symfony:${SYMFONY_VERSION}
+  - composer install --prefer-dist --no-progress
 
 script: make test

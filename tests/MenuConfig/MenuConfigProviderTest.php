@@ -16,11 +16,9 @@ class MenuConfigProviderTest extends TestCase
         $this->assertSame($config, $provider->getMenuConfig('name'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testGetMenuDefinitionThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $provider = new MenuConfigProvider();
         $provider->getMenuConfig('some_not_existing_name');
     }

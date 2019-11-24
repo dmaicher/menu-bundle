@@ -1,17 +1,17 @@
 test:
     path: /
-    controller: 'FrameworkBundle:Template:template'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction'
     defaults:
         template: test_menu.html.twig
 
 test_1:
     path: /test_1
-    controller: 'FrameworkBundle:Template:template'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction'
     defaults:
         template: test_menu.html.twig
 
 test_2:
     path: /test_2
-    controller: 'FrameworkBundle:Template:template'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction'
     defaults:
         template: test_menu.html.twig
