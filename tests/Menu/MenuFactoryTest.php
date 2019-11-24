@@ -25,7 +25,7 @@ class MenuFactoryTest extends TestCase
      */
     protected $menuFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->nodeFactory = $this->createMock(NodeFactoryInterface::class);
         $this->treeBuilder = $this->createMock(MenuTreeBuilderInterface::class);

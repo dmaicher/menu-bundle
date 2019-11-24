@@ -20,7 +20,7 @@ class MenuTreeTraverserTest extends TestCase
      */
     protected $visitors = array();
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->traverser = new MenuTreeTraverser();
 

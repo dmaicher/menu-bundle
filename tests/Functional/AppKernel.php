@@ -17,6 +17,11 @@ class AppKernel extends Kernel
         ];
     }
 
+    public function getProjectDir()
+    {
+        return __DIR__;
+    }
+
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config.yml');

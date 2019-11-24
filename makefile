@@ -6,4 +6,4 @@ test: clear_cache
 	make phpstan
 
 phpstan:
-	vendor/bin/phpstan analyse -a vendor/autoload.php -l 1 src/
+	vendor/bin/phpstan analyse -c phpstan.neon -l 1 src/
