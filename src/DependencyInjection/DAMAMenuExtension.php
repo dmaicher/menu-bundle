@@ -2,11 +2,11 @@
 
 namespace DAMA\MenuBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 
 class DAMAMenuExtension extends Extension
 {
@@ -14,17 +14,17 @@ class DAMAMenuExtension extends Extension
     const TREE_BUILDER_SERVICE_ID_PREFIX = 'dama_menu.tree_builder.custom.';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $processedConfig = $this->processConfiguration($configuration, $configs);
 
-        $globalConfig = array(
+        $globalConfig = [
             'node_factory' => $processedConfig['node_factory'],
             'twig_template' => $processedConfig['twig_template'],
-        );
+        ];
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
@@ -47,13 +47,12 @@ class DAMAMenuExtension extends Extension
                     $menuConfig['node_factory']
                 );
 
-                $menuConfigProviderDef->addMethodCall('addMenuConfig', array($name, $menuConfig));
+                $menuConfigProviderDef->addMethodCall('addMenuConfig', [$name, $menuConfig]);
             }
         }
     }
 
     /**
-     * @param ContainerBuilder $container
      * @param $prefix
      * @param $value
      *

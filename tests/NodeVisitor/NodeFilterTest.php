@@ -51,7 +51,7 @@ class NodeFilterTest extends TestCase
     /**
      * @dataProvider getTestData
      */
-    public function testVisit(array $permissions, $getTokenReturn, $isGrantedReturn, $expectsFiltered)
+    public function testVisit(array $permissions, $getTokenReturn, $isGrantedReturn, $expectsFiltered): void
     {
         $this->node->setRequiredPermissions($permissions);
 
@@ -84,12 +84,12 @@ class NodeFilterTest extends TestCase
 
     public function getTestData()
     {
-        return array(
-            array(array(), true, true, false),
-            array(array('FOO'), true, true, false),
-            array(array('FOO'), true, false, true),
-            array(array('FOO'), false, true, true),
-            array(array(new Expression('something')), false, true, true),
-        );
+        return [
+            [[], true, true, false],
+            [['FOO'], true, true, false],
+            [['FOO'], true, false, true],
+            [['FOO'], false, true, true],
+            [[new Expression('something')], false, true, true],
+        ];
     }
 }

@@ -22,21 +22,21 @@ class MenuExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return array(
-            new TwigFunction('dama_menu_render', array($this, 'render'), array('is_safe' => array('html'))),
-            new TwigFunction('dama_menu_section_label', array($this, 'getMenuSectionLabel')),
-            new TwigFunction('dama_menu_first_active_child', array($this, 'getFirstActiveChild')),
-        );
+        return [
+            new TwigFunction('dama_menu_render', [$this, 'render'], ['is_safe' => ['html']]),
+            new TwigFunction('dama_menu_section_label', [$this, 'getMenuSectionLabel']),
+            new TwigFunction('dama_menu_first_active_child', [$this, 'getFirstActiveChild']),
+        ];
     }
 
-    public function render(string $name, array $options = array()): string
+    public function render(string $name, array $options = []): string
     {
         $menu = $this->container->get('dama_menu.menu_factory')->create($name);
 
-        $defaultOptions = array(
+        $defaultOptions = [
             'collapse' => false,
             'nested' => true,
-        );
+        ];
 
         $finalOptions = array_merge($defaultOptions, $options);
         $finalOptions['currentNode'] = $menu;

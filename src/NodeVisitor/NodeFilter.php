@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * This visitor will remove the node from the tree if not all necessary permissions are granted
+ * This visitor will remove the node from the tree if not all necessary permissions are granted.
  */
 class NodeFilter implements NodeVisitorInterface
 {
@@ -31,7 +31,7 @@ class NodeFilter implements NodeVisitorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function visit(Node $node)
     {

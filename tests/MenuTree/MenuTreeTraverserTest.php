@@ -18,7 +18,7 @@ class MenuTreeTraverserTest extends TestCase
     /**
      * @var array
      */
-    protected $visitors = array();
+    protected $visitors = [];
 
     public function setUp(): void
     {

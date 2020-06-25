@@ -22,11 +22,10 @@ class NodeActivatorTest extends TestCase
      * @dataProvider getTestData
      *
      * @param string $route
-     * @param array $routes
      * @param $requestRoute
      * @param $expectedIsActive
      */
-    public function testVisit($route, array $routes, $requestRoute, $expectedIsActive)
+    public function testVisit($route, array $routes, $requestRoute, $expectedIsActive): void
     {
         $this->node->setRoute($route);
         $this->node->setAdditionalActiveRoutes($routes);
@@ -40,12 +39,12 @@ class NodeActivatorTest extends TestCase
 
     public function getTestData()
     {
-        return array(
-            array(null, array(), 'some_route', false),
-            array('some_route', array('some_other_route'), 'some_different_route', false),
-            array('some_route', array(), 'some_route', true),
-            array('some_route', array('some_other_route'), 'some_other_route', true),
-        );
+        return [
+            [null, [], 'some_route', false],
+            ['some_route', ['some_other_route'], 'some_different_route', false],
+            ['some_route', [], 'some_route', true],
+            ['some_route', ['some_other_route'], 'some_other_route', true],
+        ];
     }
 
     private function getRequestStackMock($requestRoute)
