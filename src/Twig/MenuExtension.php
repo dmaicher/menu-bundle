@@ -4,8 +4,11 @@ namespace DAMA\MenuBundle\Twig;
 
 use DAMA\MenuBundle\Node\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TemplateWrapper;
+use Twig\TwigFunction;
 
-class MenuExtension extends \Twig_Extension
+class MenuExtension extends AbstractExtension
 {
     /**
      * @var ContainerInterface
@@ -17,15 +20,12 @@ class MenuExtension extends \Twig_Extension
         $this->container = $container;
     }
 
-    /**
-     * @return array
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return array(
-            new \Twig_SimpleFunction('dama_menu_render', array($this, 'render'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('dama_menu_section_label', array($this, 'getMenuSectionLabel')),
-            new \Twig_SimpleFunction('dama_menu_first_active_child', array($this, 'getFirstActiveChild')),
+            new TwigFunction('dama_menu_render', array($this, 'render'), array('is_safe' => array('html'))),
+            new TwigFunction('dama_menu_section_label', array($this, 'getMenuSectionLabel')),
+            new TwigFunction('dama_menu_first_active_child', array($this, 'getFirstActiveChild')),
         );
     }
 
@@ -48,7 +48,7 @@ class MenuExtension extends \Twig_Extension
     {
         $activeChild = $this->getFirstActiveChild($name);
 
-        return null === $activeChild ? '' : $activeChild->getLabel();
+        return $activeChild ? $activeChild->getLabel() : '';
     }
 
     public function getFirstActiveChild(string $name): ?Node
@@ -58,17 +58,14 @@ class MenuExtension extends \Twig_Extension
         return $menu ? $menu->getFirstActiveChild() : null;
     }
 
-    protected function getTemplate(string $name): \Twig_Template
+    protected function getTemplate(string $name): TemplateWrapper
     {
         $menuConfig = $this->container->get('dama_menu.menu_config_provider')->getMenuConfig($name);
 
-        return $this->container->get('twig')->loadTemplate($menuConfig['twig_template']);
+        return $this->container->get('twig')->load($menuConfig['twig_template']);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'dama_menu_extension';
     }
