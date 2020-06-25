@@ -9,7 +9,7 @@ class MenuConfigProvider
      */
     protected $configs = [];
 
-    public function addMenuConfig(string $name, array $config)
+    public function addMenuConfig(string $name, array $config): void
     {
         $this->configs[$name] = $config;
     }

@@ -37,22 +37,22 @@ class Node
     /**
      * @var array
      */
-    protected $routeParams = array();
+    protected $routeParams = [];
 
     /**
      * @var array
      */
-    protected $additionalActiveRoutes = array();
+    protected $additionalActiveRoutes = [];
 
     /**
      * @var array
      */
-    protected $requiredPermissions = array();
+    protected $requiredPermissions = [];
 
     /**
      * @var array
      */
-    protected $attr = array();
+    protected $attr = [];
 
     /**
      * @var Node
@@ -62,7 +62,7 @@ class Node
     /**
      * @var array
      */
-    protected $children = array();
+    protected $children = [];
 
     /**
      * @var bool
@@ -99,8 +99,6 @@ class Node
     }
 
     /**
-     * @param Node $child
-     *
      * @return $this
      */
     public function addChild(Node $child)
@@ -139,10 +137,7 @@ class Node
         return $this->parent;
     }
 
-    /**
-     * @param Node $child
-     */
-    public function removeChild(Node $child)
+    public function removeChild(Node $child): void
     {
         if (isset($this->children[$child->getId()])) {
             unset($this->children[$child->getId()]);
@@ -211,21 +206,14 @@ class Node
                 }
             }
         }
-
-        return;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param array $additionalActiveRoutes
-     *
      * @return $this
      */
     public function setAdditionalActiveRoutes(array $additionalActiveRoutes)
@@ -295,8 +283,6 @@ class Node
     }
 
     /**
-     * @param array $requiredPermissions
-     *
      * @return $this
      */
     public function setRequiredPermissions(array $requiredPermissions)
@@ -341,8 +327,6 @@ class Node
     }
 
     /**
-     * @param array $routeParams
-     *
      * @return $this
      */
     public function setRouteParams(array $routeParams)
@@ -381,7 +365,7 @@ class Node
      */
     public function getAllActiveRoutes()
     {
-        return array_merge(array($this->getRoute()), $this->getAdditionalActiveRoutes());
+        return array_merge([$this->getRoute()], $this->getAdditionalActiveRoutes());
     }
 
     /**
@@ -410,14 +394,12 @@ class Node
                 return $child;
             }
         }
-
-        return;
     }
 
     /**
      * @param \DAMA\MenuBundle\Node\NodeFactoryInterface $nodeFactory
      */
-    public function setNodeFactory(NodeFactoryInterface $nodeFactory)
+    public function setNodeFactory(NodeFactoryInterface $nodeFactory): void
     {
         $this->nodeFactory = $nodeFactory;
     }

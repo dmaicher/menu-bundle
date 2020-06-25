@@ -28,10 +28,7 @@ class MenuTreeTraverser implements MenuTreeTraverserInterface
         }
     }
 
-    /**
-     * @param NodeVisitorInterface $visitor
-     */
-    public function addVisitor(NodeVisitorInterface $visitor)
+    public function addVisitor(NodeVisitorInterface $visitor): void
     {
         $this->visitors[] = $visitor;
     }

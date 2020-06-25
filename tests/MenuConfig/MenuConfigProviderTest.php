@@ -7,16 +7,16 @@ use PHPUnit\Framework\TestCase;
 
 class MenuConfigProviderTest extends TestCase
 {
-    public function testAddMenuDefinitionAndGetMenuDefinition()
+    public function testAddMenuDefinitionAndGetMenuDefinition(): void
     {
         $provider = new MenuConfigProvider();
-        $config = array('some_parameter' => true);
+        $config = ['some_parameter' => true];
         $provider->addMenuConfig('name', $config);
 
         $this->assertSame($config, $provider->getMenuConfig('name'));
     }
 
-    public function testGetMenuDefinitionThrowsException()
+    public function testGetMenuDefinitionThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $provider = new MenuConfigProvider();

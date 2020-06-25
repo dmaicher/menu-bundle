@@ -35,7 +35,7 @@ class NodeRoutePropagatorTest extends TestCase
     /**
      * @dataProvider getTestData
      */
-    public function testVisit($childRoute, $parentRoute, $expectedParentRoute)
+    public function testVisit($childRoute, $parentRoute, $expectedParentRoute): void
     {
         $this->node->setRoute($childRoute);
         $this->parent->setRoute($parentRoute);
@@ -47,10 +47,10 @@ class NodeRoutePropagatorTest extends TestCase
 
     public function getTestData()
     {
-        return array(
-            array(null, 'some_route', 'some_route'),
-            array('some_route', null, 'some_route'),
-            array('some_route', 'some_other_route', 'some_other_route'),
-        );
+        return [
+            [null, 'some_route', 'some_route'],
+            ['some_route', null, 'some_route'],
+            ['some_route', 'some_other_route', 'some_other_route'],
+        ];
     }
 }

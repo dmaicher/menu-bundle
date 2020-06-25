@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class NodeFactoryTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
         $factory = new NodeFactory();
 

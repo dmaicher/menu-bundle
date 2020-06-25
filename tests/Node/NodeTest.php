@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class NodeTest extends TestCase
 {
-    public function testAddChild()
+    public function testAddChild(): void
     {
         $node = new Node();
         $child = new Node();
@@ -17,7 +17,7 @@ class NodeTest extends TestCase
         $this->assertSame($node, $child->getParent());
     }
 
-    public function testRemoveChild()
+    public function testRemoveChild(): void
     {
         $node = new Node();
         $child = new Node();
@@ -29,7 +29,7 @@ class NodeTest extends TestCase
         $this->assertNull($child->getParent());
     }
 
-    public function testIsFirstChild()
+    public function testIsFirstChild(): void
     {
         $node = new Node();
         $child1 = new Node();
@@ -41,13 +41,13 @@ class NodeTest extends TestCase
         $this->assertSame(false, $child2->isFirstChild());
     }
 
-    public function testGetLayerReturnsZero()
+    public function testGetLayerReturnsZero(): void
     {
         $node = new Node();
         $this->assertSame(0, $node->getLayer());
     }
 
-    public function testGetLayerReturnsOne()
+    public function testGetLayerReturnsOne(): void
     {
         $node = new Node();
         $child = new Node();
@@ -56,7 +56,7 @@ class NodeTest extends TestCase
         $this->assertSame(1, $child->getLayer());
     }
 
-    public function testGetLayerReturnsTwo()
+    public function testGetLayerReturnsTwo(): void
     {
         $node = new Node();
         $child = new Node();
@@ -67,7 +67,7 @@ class NodeTest extends TestCase
         $this->assertSame(2, $childChild->getLayer());
     }
 
-    public function testSetActive()
+    public function testSetActive(): void
     {
         $node = new Node();
         $child = new Node();
@@ -79,14 +79,14 @@ class NodeTest extends TestCase
         $this->assertSame(true, $node->isActive());
     }
 
-    public function testGetFirstActiveChildReturnsNull()
+    public function testGetFirstActiveChildReturnsNull(): void
     {
         $node = new Node();
 
         $this->assertNull($node->getFirstActiveChild());
     }
 
-    public function testGetFirstActiveChildReturnsSecondChild()
+    public function testGetFirstActiveChildReturnsSecondChild(): void
     {
         $node = new Node();
         $child1 = new Node();
@@ -99,23 +99,23 @@ class NodeTest extends TestCase
         $this->assertSame($child2, $node->getFirstActiveChild());
     }
 
-    public function testGetAllActiveRoutes()
+    public function testGetAllActiveRoutes(): void
     {
         $node = new Node();
         $node->setRoute('some_route');
-        $node->setAdditionalActiveRoutes(array('some_other_route'));
+        $node->setAdditionalActiveRoutes(['some_other_route']);
 
-        $this->assertEquals(array('some_route', 'some_other_route'), $node->getAllActiveRoutes());
+        $this->assertEquals(['some_route', 'some_other_route'], $node->getAllActiveRoutes());
     }
 
-    public function testGetFirstChildWithRouteReturnsNull()
+    public function testGetFirstChildWithRouteReturnsNull(): void
     {
         $node = new Node();
 
         $this->assertNull($node->getFirstChildWithRoute());
     }
 
-    public function testGetFirstChildWithRouteReturnsSecondChild()
+    public function testGetFirstChildWithRouteReturnsSecondChild(): void
     {
         $node = new Node();
         $child1 = new Node();

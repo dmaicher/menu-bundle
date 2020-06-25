@@ -20,6 +20,7 @@
         "twig/twig": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan-shim": "^0.11",
         "phpunit/phpunit": "^8.4",
         "symfony/browser-kit": "^3.4 || ^4.4|| ^5.0",

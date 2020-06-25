@@ -35,11 +35,12 @@ class MenuFactoryTest extends TestCase
         $this->menuFactory = new MenuFactory($this->menuConfigProvider, $this->menuTreeTraverser);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $node = $this->getMockBuilder(Node::class)
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMock()
+        ;
 
         $this->nodeFactory
             ->expects($this->once())
@@ -51,10 +52,10 @@ class MenuFactoryTest extends TestCase
             ->expects($this->once())
             ->method('getMenuConfig')
             ->with('name')
-            ->will($this->returnValue(array(
+            ->will($this->returnValue([
                 'tree_builder' => $this->treeBuilder,
                 'node_factory' => $this->nodeFactory,
-            )))
+            ]))
         ;
 
         $this->menuTreeTraverser
