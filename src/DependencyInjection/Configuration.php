@@ -13,14 +13,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('dama_menu');
-        // Keep compatibility with symfony/config < 4.2
-        if (!method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->root('dama_menu');
-        } else {
-            $rootNode = $treeBuilder->getRootNode();
-        }
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('node_factory')->defaultValue('dama_menu.node_factory')->end()
