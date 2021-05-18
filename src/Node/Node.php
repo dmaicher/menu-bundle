@@ -241,7 +241,7 @@ class Node
     {
         $this->attr[$key] = $value;
 
-        return  $this;
+        return $this;
     }
 
     /**

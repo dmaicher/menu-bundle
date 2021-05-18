@@ -13,19 +13,19 @@
     ],
     "require": {
         "php": "^7.2 || ^8.0",
-        "symfony/framework-bundle": "^3.4 || ^4.4 || ^5.1",
-        "symfony/twig-bundle": "^3.4 || ^4.4 || ^5.1",
-        "symfony/yaml": "^3.4 || ^4.4 || ^5.1",
+        "symfony/framework-bundle": "^4.4 || ^5.2",
+        "symfony/twig-bundle": "^4.4 || ^5.2",
+        "symfony/yaml": "^4.4 || ^5.2",
         "twig/twig": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": "^8.5 || ^9.4",
-        "symfony/browser-kit": "^3.4 || ^4.4|| ^5.1",
-        "symfony/css-selector": "^3.4 || ^4.4 || ^5.1",
-        "symfony/expression-language": "^3.4 || ^4.4 || ^5.1",
-        "symfony/phpunit-bridge": "^5.1",
-        "symfony/security-bundle": "^3.4 || ^4.4 || ^5.1"
+        "phpunit/phpunit": "^8.5 || ^9.5",
+        "symfony/browser-kit": "^4.4|| ^5.2",
+        "symfony/css-selector": "^4.4 || ^5.2",
+        "symfony/expression-language": "^4.4 || ^5.2",
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/security-bundle": "^4.4 || ^5.2"
     },
     "autoload": {
         "psr-4": {
