@@ -26,8 +26,8 @@ class DAMAMenuExtension extends Extension
             'twig_template' => $processedConfig['twig_template'],
         ];
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
 
         if (isset($processedConfig['menues'])) {
             $menuConfigProviderDef = $container->getDefinition('dama_menu.menu_config_provider');
