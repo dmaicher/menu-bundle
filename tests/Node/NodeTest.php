@@ -3,6 +3,7 @@
 namespace Tests\Node;
 
 use DAMA\MenuBundle\Node\Node;
+use DAMA\MenuBundle\Node\NodeFactory;
 use PHPUnit\Framework\TestCase;
 
 class NodeTest extends TestCase
@@ -125,5 +126,28 @@ class NodeTest extends TestCase
         $node->addChild($child2);
 
         $this->assertSame($child2, $node->getFirstChildWithRoute());
+    }
+
+    /**
+     * @testWith [true]
+     *           [false]
+     */
+    public function testAddConditionalChildNode(bool $condition): void
+    {
+        $node = (new NodeFactory())->create('foo');
+        $node
+            ->ifTrue($condition)
+                ->child('bar')
+                    ->child('baz')
+                    ->end()
+                ->end()
+                ->child('foobar')
+                ->end()
+            ->endIf()
+            ->child('foobaz')
+            ->end()
+        ;
+
+        $this->assertCount($condition ? 3 : 1, $node->getChildren());
     }
 }

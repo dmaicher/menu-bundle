@@ -23,10 +23,12 @@ class MainMenuTreeBuilder implements MenuTreeBuilderInterface
                     ->setRoute('social_media_update_status')
                     ->setRequiredPermissions(['ROLE_SOCIAL_UPDATE_STATUS'])
                 ->end()
-                ->child('statistics')
-                    ->setRoute('social_media_statistics')
-                    ->setRequiredPermissions([new Expression("has_role('ROLE_USER')")])
-                ->end()
+                ->ifTrue($someCondition) // only add child node(s) inside if the condition is true
+                    ->child('statistics')
+                        ->setRoute('social_media_statistics')
+                        ->setRequiredPermissions([new Expression("has_role('ROLE_USER')")])
+                    ->end()
+                ->endIf()
             ->end()
         ;
     }
