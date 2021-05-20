@@ -70,6 +70,11 @@ class Node
     protected $active = false;
 
     /**
+     * @var bool|null
+     */
+    protected $ifTrue = null;
+
+    /**
      * @param null $label
      */
     public function __construct($label = null)
@@ -109,6 +114,24 @@ class Node
         return $this;
     }
 
+    public function ifTrue(bool $condition): self
+    {
+        $this->ifTrue = $condition;
+
+        return $this;
+    }
+
+    public function endIf(): self
+    {
+        if ($this->ifTrue === null) {
+            throw new \LogicException('Not currently inside an open ifTrue block. So cannot end it.');
+        }
+
+        $this->ifTrue = null;
+
+        return $this;
+    }
+
     /**
      * @param null $label
      *
@@ -124,7 +147,12 @@ class Node
         }
 
         $child = $this->nodeFactory->create($label);
-        $this->addChild($child);
+
+        if ($this->ifTrue === null || $this->ifTrue) {
+            $this->addChild($child);
+        } else {
+            $child->setParent($this);
+        }
 
         return $child;
     }
@@ -141,7 +169,7 @@ class Node
     {
         if (isset($this->children[$child->getId()])) {
             unset($this->children[$child->getId()]);
-            $child->setParent(null);
+            $child->setParent();
         }
     }
 
@@ -206,6 +234,8 @@ class Node
                 }
             }
         }
+
+        return null;
     }
 
     public function getId()
@@ -252,6 +282,8 @@ class Node
         if (isset($this->attr[$key])) {
             return $this->attr[$key];
         }
+
+        return null;
     }
 
     /**
@@ -373,13 +405,13 @@ class Node
      */
     public function isFirstChild()
     {
-        if ($this->parent) {
-            $children = $this->parent->getChildren();
-
-            return $this === reset($children);
+        if (!$this->parent) {
+            return false;
         }
 
-        return false;
+        $children = $this->parent->getChildren();
+
+        return $this === reset($children);
     }
 
     /**
@@ -394,18 +426,17 @@ class Node
                 return $child;
             }
         }
+
+        return null;
     }
 
-    /**
-     * @param \DAMA\MenuBundle\Node\NodeFactoryInterface $nodeFactory
-     */
     public function setNodeFactory(NodeFactoryInterface $nodeFactory): void
     {
         $this->nodeFactory = $nodeFactory;
     }
 
     /**
-     * @return \DAMA\MenuBundle\Node\NodeFactoryInterface
+     * @return NodeFactoryInterface
      */
     public function getNodeFactory()
     {
