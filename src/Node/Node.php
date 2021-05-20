@@ -75,6 +75,11 @@ class Node
     protected $ifTrue = null;
 
     /**
+     * @var bool
+     */
+    protected $removeIfNoChildren = false;
+
+    /**
      * @param null $label
      */
     public function __construct($label = null)
@@ -475,5 +480,20 @@ class Node
     public function hasUrl()
     {
         return $this->url !== null;
+    }
+
+    public function isRemoveIfNoChildren(): bool
+    {
+        return $this->removeIfNoChildren;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setRemoveIfNoChildren(bool $removeIfNoChildren): self
+    {
+        $this->removeIfNoChildren = $removeIfNoChildren;
+
+        return $this;
     }
 }
