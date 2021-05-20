@@ -1,7 +1,6 @@
 services:
     dama_menu.twig.menu_extension:
         class: DAMA\MenuBundle\Twig\MenuExtension
-        arguments: [ '@service_container' ]
         tags:
           - { name: twig.extension }
     

@@ -7,7 +7,7 @@ parameters:
     kernel.secret: foo
 
 framework:
-    router: { resource: "%kernel.project_dir%/routing.yml" }
+    router: { resource: "%kernel.project_dir%/routing.yml", utf8: true }
     test: ~
     session:
         storage_id: session.storage.mock_file
