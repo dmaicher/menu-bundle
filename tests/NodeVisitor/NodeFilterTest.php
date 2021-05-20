@@ -4,6 +4,7 @@ namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
+use DAMA\MenuBundle\Node\NodeFactory;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -19,12 +20,12 @@ class NodeFilterTest extends TestCase
     private $filter;
 
     /**
-     * @var TokenStorageInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TokenStorageInterface|MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var AuthorizationCheckerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var AuthorizationCheckerInterface|MockObject
      */
     private $authChecker;
 
@@ -80,6 +81,39 @@ class NodeFilterTest extends TestCase
         } else {
             $this->assertNotSame(MenuTreeTraverserInterface::STOP_TRAVERSAL, $return);
         }
+    }
+
+    /**
+     * @testWith [true]
+     *           [false]
+     */
+    public function testRemoveParentIfNoActiveChildren(bool $remove): void
+    {
+        $tree = (new NodeFactory())->create();
+        $tree
+            ->child('foo')
+                ->setRemoveIfNoChildren($remove)
+                ->child('bar')
+                    ->setRequiredPermissions(['foo'])
+                ->end()
+            ->end()
+        ;
+
+        $this->tokenStorage
+            ->expects($this->any())
+            ->method('getToken')
+            ->will($this->returnValue(null))
+        ;
+
+        $children = $tree->getChildren();
+        $foo = reset($children);
+        $this->filter->visit($foo);
+        $this->assertCount(1, $tree->getChildren());
+
+        $children = $foo->getChildren();
+        $bar = reset($children);
+        $this->filter->visit($bar);
+        $this->assertCount($remove ? 0 : 1, $tree->getChildren());
     }
 
     public function getTestData()

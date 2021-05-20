@@ -37,10 +37,23 @@ class NodeFilter implements NodeVisitorInterface
     {
         foreach ($node->getRequiredPermissions() as $permission) {
             if (!$this->tokenStorage->getToken() || !$this->authChecker->isGranted($permission)) {
-                $node->getParent()->removeChild($node);
+                $this->removeNode($node);
 
                 return MenuTreeTraverserInterface::STOP_TRAVERSAL;
             }
+        }
+    }
+
+    private function removeNode(Node $node): void
+    {
+        $parentNode = $node->getParent();
+        $parentNode->removeChild($node);
+
+        if (!$parentNode->isRootNode()
+            && $parentNode->isRemoveIfNoChildren()
+            && count($parentNode->getChildren()) === 0
+        ) {
+            $parentNode->getParent()->removeChild($parentNode);
         }
     }
 }
