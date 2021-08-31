@@ -4,7 +4,9 @@ use DAMA\MenuBundle\Menu\MenuFactory;
 use DAMA\MenuBundle\Menu\MenuFactoryInterface;
 use DAMA\MenuBundle\MenuConfig\MenuConfigProvider;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverser;
+use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\NodeFactory;
+use DAMA\MenuBundle\Node\NodeFactoryInterface;
 use DAMA\MenuBundle\NodeVisitor\NodeActivator;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
 use DAMA\MenuBundle\NodeVisitor\NodeRoutePropagator;
@@ -38,10 +40,6 @@ return function (ContainerConfigurator $container): void {
     ;
 
     $container->services()
-        ->alias(MenuFactoryInterface::class, 'dama_menu.menu_factory')
-    ;
-
-    $container->services()
         ->set('dama_menu.menu_config_provider', MenuConfigProvider::class)
     ;
 
@@ -72,5 +70,11 @@ return function (ContainerConfigurator $container): void {
         ->tag('dama_menu.node_visitor', [
             'priority' => 1,
         ])
+    ;
+
+    $container->services()
+        ->alias(MenuFactoryInterface::class, 'dama_menu.menu_factory')
+        ->alias(MenuTreeTraverserInterface::class, 'dama_menu.menu_tree_traverser')
+        ->alias(NodeFactoryInterface::class, 'dama_menu.node_factory')
     ;
 };

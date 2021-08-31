@@ -8,6 +8,9 @@ use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\Node\NodeFactoryInterface;
 
+/**
+ * @final
+ */
 class MenuFactory implements MenuFactoryInterface
 {
     /**

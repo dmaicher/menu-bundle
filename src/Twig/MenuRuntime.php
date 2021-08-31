@@ -9,6 +9,9 @@ use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 use Twig\TemplateWrapper;
 
+/**
+ * @final
+ */
 class MenuRuntime implements RuntimeExtensionInterface
 {
     /**

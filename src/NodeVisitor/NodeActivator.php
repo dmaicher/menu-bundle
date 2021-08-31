@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * This visitor will set a node to active if one of its routes matches the current route of the request.
+ *
+ * @final
  */
 class NodeActivator implements NodeVisitorInterface
 {
