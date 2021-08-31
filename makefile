@@ -10,10 +10,10 @@ phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon -l 1 src/
 
 php_cs_fixer_fix: php-cs-fixer.phar
-	./php-cs-fixer.phar fix --config .php_cs src tests
+	./php-cs-fixer.phar fix --config .php-cs-fixer.php src tests
 
 php_cs_fixer_check: php-cs-fixer.phar
-	./php-cs-fixer.phar fix --config .php_cs src tests --dry-run --diff --diff-format=udiff
+	./php-cs-fixer.phar fix --config .php-cs-fixer.php src tests --dry-run --diff
 
 php-cs-fixer.phar:
-	wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.19.0/php-cs-fixer.phar && chmod 777 php-cs-fixer.phar
+	wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.1.0/php-cs-fixer.phar && chmod 777 php-cs-fixer.phar
