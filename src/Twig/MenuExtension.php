@@ -5,6 +5,9 @@ namespace DAMA\MenuBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+/**
+ * @final
+ */
 class MenuExtension extends AbstractExtension
 {
     public function getFunctions(): array

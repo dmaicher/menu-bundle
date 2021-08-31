@@ -6,6 +6,8 @@ use DAMA\MenuBundle\Node\Node;
 
 /**
  * This visitor will propagate the route of the current node to the direct parent if it does not have a route yet.
+ *
+ * @final
  */
 class NodeRoutePropagator implements NodeVisitorInterface
 {

@@ -2,6 +2,9 @@
 
 namespace DAMA\MenuBundle\MenuConfig;
 
+/**
+ * @final
+ */
 class MenuConfigProvider
 {
     /**

@@ -7,6 +7,9 @@ use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * @final
+ */
 class NodeVisitorCompilerPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
