@@ -1,6 +1,7 @@
 <?php
 
 use DAMA\MenuBundle\Menu\MenuFactory;
+use DAMA\MenuBundle\Menu\MenuFactoryInterface;
 use DAMA\MenuBundle\MenuConfig\MenuConfigProvider;
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverser;
 use DAMA\MenuBundle\Node\NodeFactory;
@@ -34,6 +35,10 @@ return function (ContainerConfigurator $container): void {
         ->set('dama_menu.menu_factory', MenuFactory::class)
         ->arg(0, new Reference('dama_menu.menu_config_provider'))
         ->arg(1, new Reference('dama_menu.menu_tree_traverser'))
+    ;
+
+    $container->services()
+        ->alias(MenuFactoryInterface::class, 'dama_menu.menu_factory')
     ;
 
     $container->services()
