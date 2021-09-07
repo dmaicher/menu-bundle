@@ -20,17 +20,17 @@ class Node
     protected $nodeFactory;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $route;
 
@@ -55,7 +55,7 @@ class Node
     protected $attr = [];
 
     /**
-     * @var Node
+     * @var Node|null
      */
     protected $parent;
 
@@ -80,7 +80,7 @@ class Node
     protected $removeIfNoChildren = false;
 
     /**
-     * @param null $label
+     * @param string|null $label
      */
     public function __construct($label = null)
     {
@@ -89,7 +89,7 @@ class Node
     }
 
     /**
-     * @param Node $parent
+     * @param Node|null $parent
      *
      * @return $this
      */
@@ -101,7 +101,7 @@ class Node
     }
 
     /**
-     * @return Node
+     * @return Node|null
      */
     public function getParent()
     {
@@ -138,7 +138,7 @@ class Node
     }
 
     /**
-     * @param null $label
+     * @param string|null $label
      *
      * @return Node
      *
@@ -163,7 +163,7 @@ class Node
     }
 
     /**
-     * @return Node
+     * @return Node|null
      */
     public function end()
     {
@@ -300,7 +300,7 @@ class Node
     }
 
     /**
-     * @param $label
+     * @param string|null $label
      *
      * @return $this
      */
@@ -312,7 +312,7 @@ class Node
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLabel()
     {
@@ -338,7 +338,7 @@ class Node
     }
 
     /**
-     * @param $route
+     * @param string|null $route
      *
      * @return $this
      *
@@ -356,7 +356,7 @@ class Node
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getRoute()
     {
@@ -449,7 +449,7 @@ class Node
     }
 
     /**
-     * @param $url
+     * @param string|null $url
      *
      * @return $this
      *
@@ -467,7 +467,7 @@ class Node
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUrl()
     {
