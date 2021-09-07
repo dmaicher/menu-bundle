@@ -89,8 +89,6 @@ class Node
     }
 
     /**
-     * @param Node|null $parent
-     *
      * @return $this
      */
     public function setParent(Node $parent = null)
