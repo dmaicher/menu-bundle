@@ -37,9 +37,9 @@ class MenuTreeTraverser implements MenuTreeTraverserInterface
     }
 
     /**
-     * @return array
+     * @return array<NodeVisitorInterface>
      */
-    public function getVisitors()
+    public function getVisitors(): array
     {
         return $this->visitors;
     }

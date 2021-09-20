@@ -2,6 +2,8 @@
 
 namespace DAMA\MenuBundle\Node;
 
+use Symfony\Component\ExpressionLanguage\Expression;
+
 class Node
 {
     /**
@@ -15,7 +17,7 @@ class Node
     protected $id;
 
     /**
-     * @var NodeFactoryInterface
+     * @var NodeFactoryInterface|null
      */
     protected $nodeFactory;
 
@@ -79,10 +81,7 @@ class Node
      */
     protected $removeIfNoChildren = false;
 
-    /**
-     * @param string|null $label
-     */
-    public function __construct($label = null)
+    public function __construct(?string $label = null)
     {
         $this->label = $label;
         $this->id = self::$counter++;
@@ -91,17 +90,14 @@ class Node
     /**
      * @return $this
      */
-    public function setParent(Node $parent = null)
+    public function setParent(Node $parent = null): self
     {
         $this->parent = $parent;
 
         return $this;
     }
 
-    /**
-     * @return Node|null
-     */
-    public function getParent()
+    public function getParent(): ?self
     {
         return $this->parent;
     }
@@ -109,7 +105,7 @@ class Node
     /**
      * @return $this
      */
-    public function addChild(Node $child)
+    public function addChild(Node $child): self
     {
         $this->children[$child->getId()] = $child;
         $child->setParent($this);
@@ -136,13 +132,9 @@ class Node
     }
 
     /**
-     * @param string|null $label
-     *
-     * @return Node
-     *
      * @throws \BadMethodCallException
      */
-    public function child($label = null)
+    public function child(?string $label = null): self
     {
         if (!$this->nodeFactory) {
             throw new \BadMethodCallException('nodeFactory needs to be set on this node to be able
@@ -160,10 +152,7 @@ class Node
         return $child;
     }
 
-    /**
-     * @return Node|null
-     */
-    public function end()
+    public function end(): ?self
     {
         return $this->parent;
     }
@@ -177,9 +166,9 @@ class Node
     }
 
     /**
-     * @return array
+     * @return array<self>
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -187,10 +176,8 @@ class Node
     /**
      * returns the layer of this node in the menu tree.
      * Root node has layer 0. So for actual menu nodes the layer starts with 1.
-     *
-     * @return int
      */
-    public function getLayer()
+    public function getLayer(): int
     {
         if ($this->parent) {
             return $this->parent->getLayer() + 1;
@@ -200,11 +187,9 @@ class Node
     }
 
     /**
-     * @param $active
-     *
      * @return $this
      */
-    public function setActive($active)
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
@@ -215,20 +200,15 @@ class Node
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
 
     /**
      * returns the first active child.
-     *
-     * @return Node|null
      */
-    public function getFirstActiveChild()
+    public function getFirstActiveChild(): ?self
     {
         if ($this->active) {
             foreach ($this->children as $child) {
@@ -241,7 +221,7 @@ class Node
         return null;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -249,7 +229,7 @@ class Node
     /**
      * @return $this
      */
-    public function setAdditionalActiveRoutes(array $additionalActiveRoutes)
+    public function setAdditionalActiveRoutes(array $additionalActiveRoutes): self
     {
         $this->additionalActiveRoutes = $additionalActiveRoutes;
 
@@ -257,30 +237,24 @@ class Node
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
-    public function getAdditionalActiveRoutes()
+    public function getAdditionalActiveRoutes(): array
     {
         return $this->additionalActiveRoutes;
     }
 
     /**
-     * @param $key
-     * @param $value
-     *
      * @return $this
      */
-    public function setAttr($key, $value)
+    public function setAttr(string $key, $value): self
     {
         $this->attr[$key] = $value;
 
         return $this;
     }
 
-    /**
-     * @param $key
-     */
-    public function getAttr($key)
+    public function getAttr(string $key)
     {
         if (isset($this->attr[$key])) {
             return $this->attr[$key];
@@ -290,29 +264,24 @@ class Node
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
-    public function getAttrs()
+    public function getAttrs(): array
     {
         return $this->attr;
     }
 
     /**
-     * @param string|null $label
-     *
      * @return $this
      */
-    public function setLabel($label)
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -320,7 +289,7 @@ class Node
     /**
      * @return $this
      */
-    public function setRequiredPermissions(array $requiredPermissions)
+    public function setRequiredPermissions(array $requiredPermissions): self
     {
         $this->requiredPermissions = $requiredPermissions;
 
@@ -328,23 +297,21 @@ class Node
     }
 
     /**
-     * @return array
+     * @return array<string|Expression|mixed>
      */
-    public function getRequiredPermissions()
+    public function getRequiredPermissions(): array
     {
         return $this->requiredPermissions;
     }
 
     /**
-     * @param string|null $route
-     *
      * @return $this
      *
      * @throws \LogicException
      */
-    public function setRoute($route)
+    public function setRoute(?string $route): self
     {
-        if ($this->url != null) {
+        if ($this->url != null && $route !== null) {
             throw new \LogicException('You can either set a url OR a route, but not both!');
         }
 
@@ -353,10 +320,7 @@ class Node
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRoute()
+    public function getRoute(): ?string
     {
         return $this->route;
     }
@@ -364,7 +328,7 @@ class Node
     /**
      * @return $this
      */
-    public function setRouteParams(array $routeParams)
+    public function setRouteParams(array $routeParams): self
     {
         $this->routeParams = $routeParams;
 
@@ -372,41 +336,32 @@ class Node
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
-    public function getRouteParams()
+    public function getRouteParams(): array
     {
         return $this->routeParams;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRootNode()
+    public function isRootNode(): bool
     {
         return $this->parent === null;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasRoute()
+    public function hasRoute(): bool
     {
         return $this->getRoute() !== null;
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
-    public function getAllActiveRoutes()
+    public function getAllActiveRoutes(): array
     {
         return array_merge([$this->getRoute()], $this->getAdditionalActiveRoutes());
     }
 
-    /**
-     * @return bool
-     */
-    public function isFirstChild()
+    public function isFirstChild(): bool
     {
         if (!$this->parent) {
             return false;
@@ -419,10 +374,8 @@ class Node
 
     /**
      * returns first child node with route.
-     *
-     * @return Node|null
      */
-    public function getFirstChildWithRoute()
+    public function getFirstChildWithRoute(): ?self
     {
         foreach ($this->children as $child) {
             if ($child->hasRoute()) {
@@ -438,24 +391,19 @@ class Node
         $this->nodeFactory = $nodeFactory;
     }
 
-    /**
-     * @return NodeFactoryInterface
-     */
-    public function getNodeFactory()
+    public function getNodeFactory(): ?NodeFactoryInterface
     {
         return $this->nodeFactory;
     }
 
     /**
-     * @param string|null $url
-     *
      * @return $this
      *
      * @throws \LogicException
      */
-    public function setUrl($url)
+    public function setUrl(?string $url): self
     {
-        if ($this->route != null) {
+        if ($this->route != null && $url !== null) {
             throw new \LogicException('You can either set a url OR a route, but not both!');
         }
 
@@ -464,18 +412,12 @@ class Node
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasUrl()
+    public function hasUrl(): bool
     {
         return $this->url !== null;
     }

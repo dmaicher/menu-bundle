@@ -34,9 +34,6 @@ class MenuFactory implements MenuFactoryInterface
         $this->menuTreeTraverser = $menuTreeTraverser;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function create(string $name): Node
     {
         //already created for this request?

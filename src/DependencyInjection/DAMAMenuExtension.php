@@ -16,9 +16,6 @@ class DAMAMenuExtension extends Extension
     public const NODE_FACTORY_SERVICE_ID_PREFIX = 'dama_menu.node_factory.custom.';
     public const TREE_BUILDER_SERVICE_ID_PREFIX = 'dama_menu.tree_builder.custom.';
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -55,15 +52,9 @@ class DAMAMenuExtension extends Extension
         }
     }
 
-    /**
-     * @param $prefix
-     * @param $value
-     *
-     * @return Reference
-     */
-    protected function getReferenceFromConfigValue(ContainerBuilder $container, $prefix, $value)
+    protected function getReferenceFromConfigValue(ContainerBuilder $container, string $prefix, string $value): Reference
     {
-        if (class_exists($value)) {
+        if (class_exists($value) && !$container->has($value)) {
             $id = $prefix.md5($value);
             $container->register($id, $value);
 
