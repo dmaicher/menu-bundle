@@ -5,15 +5,12 @@ namespace DAMA\MenuBundle\MenuTree;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeVisitorInterface;
 
-/**
- * @final
- */
-class MenuTreeTraverser implements MenuTreeTraverserInterface
+final class MenuTreeTraverser implements MenuTreeTraverserInterface
 {
     /**
      * @var NodeVisitorInterface[]
      */
-    protected $visitors = [];
+    private $visitors = [];
 
     public function traverse(Node $node): void
     {

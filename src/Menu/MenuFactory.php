@@ -8,25 +8,22 @@ use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\Node\NodeFactoryInterface;
 
-/**
- * @final
- */
-class MenuFactory implements MenuFactoryInterface
+final class MenuFactory implements MenuFactoryInterface
 {
     /**
      * @var MenuConfigProvider
      */
-    protected $menuConfigProvider;
+    private $menuConfigProvider;
 
     /**
      * @var MenuTreeTraverserInterface
      */
-    protected $menuTreeTraverser;
+    private $menuTreeTraverser;
 
     /**
      * @var array<string, Node>
      */
-    protected $cache = [];
+    private $cache = [];
 
     public function __construct(MenuConfigProvider $menuConfigProvider, MenuTreeTraverserInterface $menuTreeTraverser)
     {
@@ -53,7 +50,7 @@ class MenuFactory implements MenuFactoryInterface
         return $root;
     }
 
-    protected function getRootNode(NodeFactoryInterface $nodeFactory, MenuTreeBuilderInterface $menuTreeBuilder): Node
+    private function getRootNode(NodeFactoryInterface $nodeFactory, MenuTreeBuilderInterface $menuTreeBuilder): Node
     {
         $root = $nodeFactory->create(null);
         $menuTreeBuilder->build($root);

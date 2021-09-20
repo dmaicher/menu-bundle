@@ -2,10 +2,7 @@
 
 namespace DAMA\MenuBundle\Node;
 
-/**
- * @final
- */
-class NodeFactory implements NodeFactoryInterface
+final class NodeFactory implements NodeFactoryInterface
 {
     public function create(?string $label = null): Node
     {
