@@ -7,7 +7,7 @@ test: clear_cache
 	make phpstan
 
 phpstan:
-	vendor/bin/phpstan analyse -c phpstan.neon -l 1 src/
+	vendor/bin/phpstan analyse -c phpstan.neon -l max src/
 
 php_cs_fixer_fix: php-cs-fixer.phar
 	./php-cs-fixer.phar fix --config .php-cs-fixer.php src tests

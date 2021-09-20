@@ -37,22 +37,22 @@ class Node
     protected $route;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $routeParams = [];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $additionalActiveRoutes = [];
 
     /**
-     * @var array
+     * @var array<string|Expression|mixed>
      */
     protected $requiredPermissions = [];
 
     /**
-     * @var array
+     * @var array<mixed, mixed>
      */
     protected $attr = [];
 
@@ -62,7 +62,7 @@ class Node
     protected $parent;
 
     /**
-     * @var array
+     * @var array<self>
      */
     protected $children = [];
 
@@ -227,6 +227,8 @@ class Node
     }
 
     /**
+     * @param array<string> $additionalActiveRoutes
+     *
      * @return $this
      */
     public function setAdditionalActiveRoutes(array $additionalActiveRoutes): self
@@ -245,6 +247,8 @@ class Node
     }
 
     /**
+     * @param mixed $value
+     *
      * @return $this
      */
     public function setAttr(string $key, $value): self
@@ -254,6 +258,9 @@ class Node
         return $this;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getAttr(string $key)
     {
         if (isset($this->attr[$key])) {
@@ -287,6 +294,8 @@ class Node
     }
 
     /**
+     * @param array<string|Expression|mixed> $requiredPermissions
+     *
      * @return $this
      */
     public function setRequiredPermissions(array $requiredPermissions): self
@@ -326,6 +335,8 @@ class Node
     }
 
     /**
+     * @param array<string, mixed> $routeParams
+     *
      * @return $this
      */
     public function setRouteParams(array $routeParams): self
@@ -358,7 +369,7 @@ class Node
      */
     public function getAllActiveRoutes(): array
     {
-        return array_merge([$this->getRoute()], $this->getAdditionalActiveRoutes());
+        return array_filter(array_merge([$this->getRoute()], $this->getAdditionalActiveRoutes()));
     }
 
     public function isFirstChild(): bool

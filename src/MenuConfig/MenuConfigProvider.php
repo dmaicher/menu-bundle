@@ -8,10 +8,13 @@ namespace DAMA\MenuBundle\MenuConfig;
 class MenuConfigProvider
 {
     /**
-     * @var array
+     * @var array<string, array>
      */
     protected $configs = [];
 
+    /**
+     * @param array<string, mixed> $config
+     */
     public function addMenuConfig(string $name, array $config): void
     {
         $this->configs[$name] = $config;
@@ -19,6 +22,8 @@ class MenuConfigProvider
 
     /**
      * @throws \InvalidArgumentException
+     *
+     * @return array<mixed>
      */
     public function getMenuConfig(string $name): array
     {

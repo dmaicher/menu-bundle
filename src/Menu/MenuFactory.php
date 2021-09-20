@@ -24,7 +24,7 @@ class MenuFactory implements MenuFactoryInterface
     protected $menuTreeTraverser;
 
     /**
-     * @var array
+     * @var array<string, Node>
      */
     protected $cache = [];
 
