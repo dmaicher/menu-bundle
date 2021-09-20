@@ -6,5 +6,5 @@ use DAMA\MenuBundle\Node\Node;
 
 interface MenuTreeBuilderInterface
 {
-    public function build(Node $root);
+    public function build(Node $root): void;
 }
