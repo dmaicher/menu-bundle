@@ -436,4 +436,9 @@ class Node
 
         return $this;
     }
+
+    public static function resetCounter(): void
+    {
+        self::$counter = 0;
+    }
 }
