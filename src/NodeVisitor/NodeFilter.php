@@ -49,13 +49,16 @@ class NodeFilter implements NodeVisitorInterface
     private function removeNode(Node $node): void
     {
         $parentNode = $node->getParent();
+        assert($parentNode instanceof Node);
         $parentNode->removeChild($node);
 
         if (!$parentNode->isRootNode()
             && $parentNode->isRemoveIfNoChildren()
             && count($parentNode->getChildren()) === 0
         ) {
-            $parentNode->getParent()->removeChild($parentNode);
+            $parentOfParentNode = $parentNode->getParent();
+            assert($parentOfParentNode instanceof Node);
+            $parentOfParentNode->removeChild($parentNode);
         }
     }
 }

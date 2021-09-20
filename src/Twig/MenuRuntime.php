@@ -36,6 +36,9 @@ class MenuRuntime implements RuntimeExtensionInterface
         $this->menuConfigProvider = $menuConfigProvider;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function render(string $name, array $options = []): string
     {
         $menu = $this->menuFactory->create($name);
@@ -60,9 +63,7 @@ class MenuRuntime implements RuntimeExtensionInterface
 
     public function getFirstActiveChild(string $name): ?Node
     {
-        $menu = $this->menuFactory->create($name);
-
-        return $menu ? $menu->getFirstActiveChild() : null;
+        return $this->menuFactory->create($name)->getFirstActiveChild();
     }
 
     private function getTemplate(string $name): TemplateWrapper
