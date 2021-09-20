@@ -9,12 +9,15 @@ parameters:
 framework:
     router: { resource: "%kernel.project_dir%/routing.yml", utf8: true }
     test: ~
-    session:
-        storage_id: session.storage.mock_file
 
 security:
     providers:
-        in_memory: { memory: ~ }
+        in_memory:
+            memory:
+                users:
+                    foo: { password: bar, roles: [ROLE_FOO] }
+                    bar: { password: foo, roles: [ROLE_BAR] }
+
     firewalls:
         main:
-            anonymous: ~
+            http_basic: ~
