@@ -9,10 +9,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * This visitor will remove the node from the tree if not all necessary permissions are granted.
- *
- * @final
  */
-class NodeFilter implements NodeVisitorInterface
+final class NodeFilter implements NodeVisitorInterface
 {
     /**
      * @var TokenStorageInterface

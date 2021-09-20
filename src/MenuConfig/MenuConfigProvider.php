@@ -2,15 +2,12 @@
 
 namespace DAMA\MenuBundle\MenuConfig;
 
-/**
- * @final
- */
-class MenuConfigProvider
+final class MenuConfigProvider
 {
     /**
      * @var array<string, array>
      */
-    protected $configs = [];
+    private $configs = [];
 
     /**
      * @param array<string, mixed> $config

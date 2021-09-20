@@ -8,10 +8,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-/**
- * @final
- */
-class DAMAMenuExtension extends Extension
+final class DAMAMenuExtension extends Extension
 {
     public const NODE_FACTORY_SERVICE_ID_PREFIX = 'dama_menu.node_factory.custom.';
     public const TREE_BUILDER_SERVICE_ID_PREFIX = 'dama_menu.tree_builder.custom.';
