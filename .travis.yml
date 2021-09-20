@@ -17,7 +17,8 @@ matrix:
         
         - php: 8.0
           env:
-            - SYMFONY_REQUIRE="5.3.*"
+            - SYMFONY_REQUIRE="6.0.*"
+            - STABILITY=dev
 
 install:
     - composer global require --no-progress --no-scripts --no-plugins symfony/flex

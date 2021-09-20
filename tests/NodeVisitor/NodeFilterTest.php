@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class NodeFilterTest extends TestCase
@@ -119,11 +120,11 @@ class NodeFilterTest extends TestCase
     public function getTestData()
     {
         return [
-            [[], true, true, false],
-            [['FOO'], true, true, false],
-            [['FOO'], true, false, true],
-            [['FOO'], false, true, true],
-            [[new Expression('something')], false, true, true],
+            [[], $this->createMock(TokenInterface::class), true, false],
+            [['FOO'], $this->createMock(TokenInterface::class), true, false],
+            [['FOO'], $this->createMock(TokenInterface::class), false, true],
+            [['FOO'], null, true, true],
+            [[new Expression('something')], null, true, true],
         ];
     }
 }
