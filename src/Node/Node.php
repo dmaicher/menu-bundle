@@ -52,7 +52,7 @@ class Node
     protected $requiredPermissions = [];
 
     /**
-     * @var array<mixed, mixed>
+     * @var array<string, mixed>
      */
     protected $attr = [];
 

@@ -33,21 +33,21 @@ final class MenuFactory implements MenuFactoryInterface
 
     public function create(string $name): Node
     {
-        //already created for this request?
         if (isset($this->cache[$name])) {
             return $this->cache[$name];
         }
 
         $menuConfig = $this->menuConfigProvider->getMenuConfig($name);
+        /** @var NodeFactoryInterface $nodeFactory */
+        $nodeFactory = $menuConfig['node_factory'];
+        /** @var MenuTreeBuilderInterface $treeBuilder */
+        $treeBuilder = $menuConfig['tree_builder'];
 
-        $root = $this->getRootNode($menuConfig['node_factory'], $menuConfig['tree_builder']);
+        $root = $this->getRootNode($nodeFactory, $treeBuilder);
 
         $this->menuTreeTraverser->traverse($root);
 
-        //store in "cache"
-        $this->cache[$name] = $root;
-
-        return $root;
+        return $this->cache[$name] = $root;
     }
 
     private function getRootNode(NodeFactoryInterface $nodeFactory, MenuTreeBuilderInterface $menuTreeBuilder): Node

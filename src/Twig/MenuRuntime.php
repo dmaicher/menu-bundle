@@ -67,6 +67,9 @@ final class MenuRuntime implements RuntimeExtensionInterface
     {
         $menuConfig = $this->menuConfigProvider->getMenuConfig($name);
 
-        return $this->twig->load($menuConfig['twig_template']);
+        /** @var string $template */
+        $template = $menuConfig['twig_template'];
+
+        return $this->twig->load($template);
     }
 }

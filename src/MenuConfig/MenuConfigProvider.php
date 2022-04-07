@@ -5,7 +5,7 @@ namespace DAMA\MenuBundle\MenuConfig;
 final class MenuConfigProvider
 {
     /**
-     * @var array<string, array>
+     * @var array<string, array<string, mixed>>
      */
     private $configs = [];
 
@@ -20,7 +20,7 @@ final class MenuConfigProvider
     /**
      * @throws \InvalidArgumentException
      *
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     public function getMenuConfig(string $name): array
     {
