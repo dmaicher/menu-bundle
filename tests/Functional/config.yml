@@ -9,6 +9,7 @@ parameters:
 framework:
     router: { resource: "%kernel.project_dir%/routing.yml", utf8: true }
     test: ~
+    http_method_override: false
 
 security:
     providers:
