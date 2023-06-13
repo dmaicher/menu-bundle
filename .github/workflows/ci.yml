@@ -17,10 +17,9 @@ jobs:
                     SYMFONY_REQUIRE: 5.4.*
                 -   php: 8.0
                 -   php: 8.1
-                    SYMFONY_REQUIRE: 6.0.*
-                -   php: 8.1
-                    stability: dev
-                    SYMFONY_REQUIRE: 6.1.*
+                    SYMFONY_REQUIRE: 6.2.*
+                -   php: 8.2
+                    SYMFONY_REQUIRE: 6.3.*
 
         steps:
         -   uses: actions/checkout@v2
@@ -36,7 +35,9 @@ jobs:
             run: composer config minimum-stability ${{ matrix.stability }}
         
         -   name: Install symfony/flex
-            run: composer global require symfony/flex
+            run: | 
+                composer global config --no-plugins allow-plugins.symfony/flex true
+                composer global require symfony/flex
 
         -   name: Install dependencies
             env:
