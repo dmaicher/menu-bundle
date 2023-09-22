@@ -20,9 +20,6 @@ final class NodeActivator implements NodeVisitorInterface
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function visit(Node $node): void
     {
         if (!$request = $this->requestStack->getCurrentRequest()) {

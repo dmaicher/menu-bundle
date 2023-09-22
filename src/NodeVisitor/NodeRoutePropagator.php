@@ -9,9 +9,6 @@ use DAMA\MenuBundle\Node\Node;
  */
 final class NodeRoutePropagator implements NodeVisitorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function visit(Node $node): void
     {
         $parent = $node->getParent();
