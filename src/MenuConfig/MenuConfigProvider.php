@@ -18,9 +18,9 @@ final class MenuConfigProvider
     }
 
     /**
-     * @throws \InvalidArgumentException
-     *
      * @return array<string, mixed>
+     *
+     * @throws \InvalidArgumentException
      */
     public function getMenuConfig(string $name): array
     {

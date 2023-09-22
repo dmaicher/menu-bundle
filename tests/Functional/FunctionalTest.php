@@ -63,7 +63,7 @@ class FunctionalTest extends WebTestCase
             return;
         }
 
-        //TODO: cleanup once Symfony 4.4 support is dropped
+        // TODO: cleanup once Symfony 4.4 support is dropped
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
 
         $container = self::$kernel->getContainer()->get('test.service_container');

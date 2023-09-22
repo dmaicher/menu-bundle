@@ -30,9 +30,6 @@ final class NodeFilter implements NodeVisitorInterface
         $this->authChecker = $authChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function visit(Node $node)
     {
         foreach ($node->getRequiredPermissions() as $permission) {

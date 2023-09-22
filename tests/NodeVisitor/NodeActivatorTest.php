@@ -22,8 +22,6 @@ class NodeActivatorTest extends TestCase
      * @dataProvider getTestData
      *
      * @param string $route
-     * @param $requestRoute
-     * @param $expectedIsActive
      */
     public function testVisit($route, array $routes, $requestRoute, $expectedIsActive): void
     {

@@ -74,14 +74,14 @@ class Node
     /**
      * @var bool|null
      */
-    protected $ifTrue = null;
+    protected $ifTrue;
 
     /**
      * @var bool
      */
     protected $removeIfNoChildren = false;
 
-    public function __construct(?string $label = null)
+    public function __construct(string $label = null)
     {
         $this->label = $label;
         $this->id = self::$counter++;
@@ -134,7 +134,7 @@ class Node
     /**
      * @throws \BadMethodCallException
      */
-    public function child(?string $label = null): self
+    public function child(string $label = null): self
     {
         if (!$this->nodeFactory) {
             throw new \BadMethodCallException('nodeFactory needs to be set on this node to be able
@@ -183,7 +183,7 @@ class Node
             return $this->parent->getLayer() + 1;
         }
 
-        return 0; //root
+        return 0; // root
     }
 
     /**
@@ -247,9 +247,9 @@ class Node
     }
 
     /**
-     * @param mixed $value
-     *
      * @return $this
+     *
+     * @phpstan-ignore-next-line
      */
     public function setAttr(string $key, $value): self
     {
