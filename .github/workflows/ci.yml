@@ -10,16 +10,17 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                -   php: 7.2
+                -   php: 7.4
                     composer-flags: --prefer-lowest
-                -   php: 7.3
                 -   php: 7.4
                     SYMFONY_REQUIRE: 5.4.*
                 -   php: 8.0
                 -   php: 8.1
-                    SYMFONY_REQUIRE: 6.3.*
+                    SYMFONY_REQUIRE: 6.4.*
                 -   php: 8.2
-                    SYMFONY_REQUIRE: 7.0.*
+                    SYMFONY_REQUIRE: 7.1.*
+                -   php: 8.3
+                    SYMFONY_REQUIRE: 7.1.*
                     stability: dev
 
         steps:
