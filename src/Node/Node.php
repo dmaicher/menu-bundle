@@ -81,7 +81,7 @@ class Node
      */
     protected $removeIfNoChildren = false;
 
-    public function __construct(string $label = null)
+    public function __construct(?string $label = null)
     {
         $this->label = $label;
         $this->id = self::$counter++;
@@ -90,7 +90,7 @@ class Node
     /**
      * @return $this
      */
-    public function setParent(Node $parent = null): self
+    public function setParent(?Node $parent = null): self
     {
         $this->parent = $parent;
 
@@ -134,7 +134,7 @@ class Node
     /**
      * @throws \BadMethodCallException
      */
-    public function child(string $label = null): self
+    public function child(?string $label = null): self
     {
         if (!$this->nodeFactory) {
             throw new \BadMethodCallException('nodeFactory needs to be set on this node to be able
