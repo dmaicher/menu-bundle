@@ -4,10 +4,7 @@ namespace Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\InMemoryUser;
-use Symfony\Component\Security\Core\User\User;
 
 class FunctionalTest extends WebTestCase
 {
@@ -51,33 +48,7 @@ class FunctionalTest extends WebTestCase
 
     private function loginUser(KernelBrowser $client, string $username, string $password, array $roles): void
     {
-        if (class_exists(InMemoryUser::class)) {
-            $user = new InMemoryUser($username, $password, $roles);
-        } else {
-            $user = new User($username, $password, $roles);
-        }
-
-        if (method_exists($client, 'loginUser')) {
-            $client->loginUser($user);
-
-            return;
-        }
-
-        // TODO: cleanup once Symfony 4.4 support is dropped
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
-
-        $container = self::$kernel->getContainer()->get('test.service_container');
-        $container->get('security.untracked_token_storage')->setToken($token);
-
-        if (!$container->has('session') && !$container->has('session_factory')) {
-            return;
-        }
-
-        $session = $container->get($container->has('session') ? 'session' : 'session_factory');
-        $session->set('_security_main', serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $client->getCookieJar()->set($cookie);
+        $user = new InMemoryUser($username, $password, $roles);
+        $client->loginUser($user);
     }
 }
