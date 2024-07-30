@@ -50,6 +50,8 @@ final class MenuCompilerPass implements CompilerPassInterface
                 $menuConfigProviderDef->addMethodCall('addMenuConfig', [$name, $menuConfig]);
             }
         }
+
+        $container->getParameterBag()->remove('dama.menu.config');
     }
 
     protected function getReferenceFromConfigValue(ContainerBuilder $container, string $prefix, string $value): Reference
