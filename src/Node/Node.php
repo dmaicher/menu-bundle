@@ -152,8 +152,12 @@ class Node
         return $child;
     }
 
-    public function end(): ?self
+    public function end(): self
     {
+        if ($this->parent === null) {
+            throw new \LogicException('Cannot call end() on root node');
+        }
+
         return $this->parent;
     }
 
