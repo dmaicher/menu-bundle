@@ -15,3 +15,9 @@ test_2:
     controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction'
     defaults:
         template: test_menu.html.twig
+
+test_3:
+    path: /test_3
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction'
+    defaults:
+        template: test_menu.html.twig

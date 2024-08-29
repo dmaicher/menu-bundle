@@ -3,6 +3,7 @@
 namespace DAMA\MenuBundle\Node;
 
 use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\HttpFoundation\Request;
 
 class Node
 {
@@ -45,6 +46,11 @@ class Node
      * @var array<string>
      */
     protected $additionalActiveRoutes = [];
+
+    /**
+     * @var callable(Request): bool|null
+     */
+    protected $additionalActiveRequestMatcher;
 
     /**
      * @var array<string|Expression|mixed>
@@ -455,5 +461,25 @@ class Node
     public static function resetCounter(): void
     {
         self::$counter = 0;
+    }
+
+    /**
+     * @return callable(Request): bool|null
+     */
+    public function getAdditionalActiveRequestMatcher(): ?callable
+    {
+        return $this->additionalActiveRequestMatcher;
+    }
+
+    /**
+     * @param callable(Request): bool|null $additionalActiveRequestMatcher
+     *
+     * @return $this
+     */
+    public function setAdditionalActiveRequestMatcher(?callable $additionalActiveRequestMatcher): self
+    {
+        $this->additionalActiveRequestMatcher = $additionalActiveRequestMatcher;
+
+        return $this;
     }
 }
