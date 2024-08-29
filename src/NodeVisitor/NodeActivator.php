@@ -10,10 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class NodeActivator implements NodeVisitorInterface
 {
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     public function __construct(RequestStack $requestStack)
     {
@@ -27,6 +24,14 @@ final class NodeActivator implements NodeVisitorInterface
         }
 
         if (in_array($request->get('_route'), $node->getAllActiveRoutes())) {
+            $node->setActive(true);
+
+            return;
+        }
+
+        if (($callable = $node->getAdditionalActiveRequestMatcher())
+            && $callable($request)
+        ) {
             $node->setActive(true);
         }
     }

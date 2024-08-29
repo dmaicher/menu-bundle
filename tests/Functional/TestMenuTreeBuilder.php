@@ -4,6 +4,7 @@ namespace Tests\Functional;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeBuilderInterface;
 use DAMA\MenuBundle\Node\Node;
+use Symfony\Component\HttpFoundation\Request;
 
 class TestMenuTreeBuilder implements MenuTreeBuilderInterface
 {
@@ -29,6 +30,9 @@ class TestMenuTreeBuilder implements MenuTreeBuilderInterface
                 ->end()
                 ->child('bar-sub-2')
                     ->setRoute('test_2')
+                    ->setAdditionalActiveRequestMatcher(static function (Request $request): bool {
+                        return str_starts_with($request->getPathInfo(), '/test_');
+                    })
                 ->end()
             ->end()
         ;

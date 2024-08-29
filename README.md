@@ -18,6 +18,10 @@ class MainMenuTreeBuilder implements MenuTreeBuilderInterface
                 ->child('stream')
                     ->setRoute('social_media_stream')
                     ->setRequiredPermissions(['ROLE_SOCIAL_STREAM'])
+                    ->setAdditionalActiveRequestMatcher(static function (Request $request): bool {
+                        // additionally will mark node as active if the request path starts with '/foo_bar'
+                        return str_starts_with($request->getPathInfo(), '/foo_bar');
+                    })
                 ->end()
                 ->child('update_status')
                     ->setRoute('social_media_update_status')

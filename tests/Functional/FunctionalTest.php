@@ -25,6 +25,10 @@ class FunctionalTest extends WebTestCase
 
         $this->assertCount(2, $crawler->filter('a[href="/test_2"]'));
         $this->assertCount(0, $crawler->filter('a[href="/test_1"]'));
+
+        $crawler = $client->request('GET', '/test_3');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('li.menu-item-active > a[href="/test_2"]'));
     }
 
     public function testRenderMenuWithUserBar(): void
