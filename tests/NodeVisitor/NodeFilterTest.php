@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\MenuTree\MenuTreeTraverserInterface;
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\Node\NodeFactory;
 use DAMA\MenuBundle\NodeVisitor\NodeFilter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\Expression;
@@ -15,30 +19,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class NodeFilterTest extends TestCase
 {
-    /**
-     * @var NodeFilter
-     */
-    private $filter;
-
-    /**
-     * @var TokenStorageInterface|MockObject
-     */
-    private $tokenStorage;
-
-    /**
-     * @var AuthorizationCheckerInterface|MockObject
-     */
-    private $authChecker;
-
-    /**
-     * @var Node
-     */
-    private $node;
-
-    /**
-     * @var Node|MockObject
-     */
-    private $parent;
+    private NodeFilter $filter;
+    private TokenStorageInterface&MockObject $tokenStorage;
+    private AuthorizationCheckerInterface&MockObject $authChecker;
+    private Node $node;
+    private Node&MockObject $parent;
+    private TokenInterface&MockObject $token;
 
     public function setUp(): void
     {
@@ -46,27 +32,26 @@ class NodeFilterTest extends TestCase
         $this->authChecker = $this->createMock(AuthorizationCheckerInterface::class);
         $this->filter = new NodeFilter($this->tokenStorage, $this->authChecker);
         $this->node = new Node();
-        $this->parent = $this->getMockBuilder(Node::class)->getMock();
+        $this->parent = $this->createMock(Node::class);
         $this->node->setParent($this->parent);
+        $this->token = $this->createMock(TokenInterface::class);
     }
 
-    /**
-     * @dataProvider getTestData
-     */
-    public function testVisit(array $permissions, $getTokenReturn, $isGrantedReturn, $expectsFiltered): void
+    #[DataProvider('getTestData')]
+    public function testVisit(array $permissions, bool $hasToken, $isGrantedReturn, $expectsFiltered): void
     {
         $this->node->setRequiredPermissions($permissions);
 
         $this->tokenStorage
             ->expects($this->any())
             ->method('getToken')
-            ->will($this->returnValue($getTokenReturn))
+            ->willReturn($hasToken ? $this->token : null)
         ;
 
         $this->authChecker
             ->expects($this->any())
             ->method('isGranted')
-            ->will($this->returnValue($isGrantedReturn))
+            ->willReturn($isGrantedReturn)
         ;
 
         if ($expectsFiltered) {
@@ -84,10 +69,8 @@ class NodeFilterTest extends TestCase
         }
     }
 
-    /**
-     * @testWith [true]
-     *           [false]
-     */
+    #[TestWith([true])]
+    #[TestWith([false])]
     public function testRemoveParentIfNoActiveChildren(bool $remove): void
     {
         $tree = (new NodeFactory())->create();
@@ -117,14 +100,14 @@ class NodeFilterTest extends TestCase
         $this->assertCount($remove ? 0 : 1, $tree->getChildren());
     }
 
-    public function getTestData()
+    public static function getTestData(): array
     {
         return [
-            [[], $this->createMock(TokenInterface::class), true, false],
-            [['FOO'], $this->createMock(TokenInterface::class), true, false],
-            [['FOO'], $this->createMock(TokenInterface::class), false, true],
-            [['FOO'], null, true, true],
-            [[new Expression('something')], null, true, true],
+            [[], true, true, false],
+            [['FOO'], true, true, false],
+            [['FOO'], true, false, true],
+            [['FOO'], false, true, true],
+            [[new Expression('something')], false, true, true],
         ];
     }
 }

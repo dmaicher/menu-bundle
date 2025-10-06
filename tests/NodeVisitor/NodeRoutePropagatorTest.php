@@ -1,28 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\Node\Node;
-use DAMA\MenuBundle\NodeVisitor\NodeActivator;
 use DAMA\MenuBundle\NodeVisitor\NodeRoutePropagator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class NodeRoutePropagatorTest extends TestCase
 {
-    /**
-     * @var NodeActivator
-     */
-    protected $propagator;
-
-    /**
-     * @var Node
-     */
-    protected $node;
-
-    /**
-     * @var Node
-     */
-    protected $parent;
+    private NodeRoutePropagator $propagator;
+    private Node $node;
+    private Node $parent;
 
     public function setUp(): void
     {
@@ -32,9 +23,7 @@ class NodeRoutePropagatorTest extends TestCase
         $this->parent->addChild($this->node);
     }
 
-    /**
-     * @dataProvider getTestData
-     */
+    #[DataProvider('getTestData')]
     public function testVisit($childRoute, $parentRoute, $expectedParentRoute): void
     {
         $this->node->setRoute($childRoute);
@@ -45,7 +34,7 @@ class NodeRoutePropagatorTest extends TestCase
         $this->assertEquals($expectedParentRoute, $this->parent->getRoute());
     }
 
-    public function getTestData()
+    public static function getTestData(): array
     {
         return [
             [null, 'some_route', 'some_route'],
