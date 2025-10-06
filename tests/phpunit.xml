@@ -1,26 +1,24 @@
-<phpunit bootstrap="./../vendor/autoload.php" colors="true">
-    <php>
-        <env name="KERNEL_CLASS" value="Tests\Functional\AppKernel" />
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[direct]=99&amp;max[self]=99" />
-    </php>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         colors="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         displayDetailsOnAllIssues="true"
+>
     <testsuites>
-        <testsuite name="DMMenuBundle test suite">
-            <directory suffix="Test.php">./Tests</directory>
+        <testsuite name="DMMenuBundle Test Suite">
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory>./</directory>
-            <exclude>
-                <directory>./tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+    <source ignoreSuppressionOfDeprecations="true">
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
 
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
-    </listeners>
+    <php>
+        <env name="KERNEL_CLASS" value="Tests\Functional\AppKernel" />
+    </php>
 </phpunit>

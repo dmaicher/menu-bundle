@@ -24,7 +24,7 @@ final class NodeFilter implements NodeVisitorInterface
 
     public function __construct(
         TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authChecker
+        AuthorizationCheckerInterface $authChecker,
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authChecker = $authChecker;

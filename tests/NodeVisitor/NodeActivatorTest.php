@@ -1,33 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\NodeVisitor;
 
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\NodeVisitor\NodeActivator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class NodeActivatorTest extends TestCase
 {
-    /**
-     * @var Node
-     */
-    protected $node;
+    protected Node $node;
 
     public function setUp(): void
     {
         $this->node = new Node();
     }
 
-    /**
-     * @dataProvider getTestData
-     *
-     * @param string $route
-     */
-    public function testVisit($route, array $routes, $requestRoute, $expectedIsActive): void
+    #[DataProvider('getTestData')]
+    public function testVisit(?string $route, array $routes, $requestRoute, $expectedIsActive): void
     {
         $this->node->setRoute($route);
         $this->node->setAdditionalActiveRoutes($routes);
-        $requestStack = $this->getRequestStackMock($requestRoute);
+        $requestStack = $this->getRequestStack($requestRoute);
         $activator = new NodeActivator($requestStack);
 
         $activator->visit($this->node);
@@ -35,7 +33,7 @@ class NodeActivatorTest extends TestCase
         $this->assertEquals($expectedIsActive, $this->node->isActive());
     }
 
-    public function getTestData()
+    public static function getTestData(): array
     {
         return [
             [null, [], 'some_route', false],
@@ -45,13 +43,13 @@ class NodeActivatorTest extends TestCase
         ];
     }
 
-    private function getRequestStackMock($requestRoute)
+    private function getRequestStack(string $requestRoute): RequestStack
     {
-        $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
-        $request->expects($this->any())->method('get')->with('_route')->will($this->returnValue($requestRoute));
+        $request = new Request();
+        $request->attributes->set('_route', $requestRoute);
 
-        $requestStack = $this->getMockBuilder('Symfony\Component\HttpFoundation\RequestStack')->getMock();
-        $requestStack->expects($this->any())->method('getCurrentRequest')->will($this->returnValue($request));
+        $requestStack = new RequestStack();
+        $requestStack->push($request);
 
         return $requestStack;
     }
