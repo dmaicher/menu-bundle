@@ -23,7 +23,7 @@ final class NodeActivator implements NodeVisitorInterface
             return;
         }
 
-        if (in_array($request->get('_route'), $node->getAllActiveRoutes())) {
+        if (in_array($request->attributes->get('_route'), $node->getAllActiveRoutes(), true)) {
             $node->setActive(true);
 
             return;
