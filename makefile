@@ -3,7 +3,7 @@ clear_cache:
 	rm -rf tests/Functional/var/cache/*
 
 test: clear_cache
-	vendor/bin/phpunit -c tests tests
+	vendor/bin/phpunit
 
 phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon -l max src/
