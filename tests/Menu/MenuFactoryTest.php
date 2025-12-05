@@ -45,7 +45,7 @@ class MenuFactoryTest extends TestCase
         $this->nodeFactory
             ->expects($this->once())
             ->method('create')
-            ->will($this->returnValue($node))
+            ->willReturn($node)
         ;
 
         $this->menuConfigProvider

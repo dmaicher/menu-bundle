@@ -86,7 +86,7 @@ class NodeFilterTest extends TestCase
         $this->tokenStorage
             ->expects($this->any())
             ->method('getToken')
-            ->will($this->returnValue(null))
+            ->willReturn(null)
         ;
 
         $children = $tree->getChildren();
