@@ -53,7 +53,7 @@ class MenuTreeTraverserTest extends TestCase
             ->expects($this->once())
             ->method('visit')
             ->with($child)
-            ->will($this->returnValue(MenuTreeTraverserInterface::STOP_TRAVERSAL))
+            ->willReturn(MenuTreeTraverserInterface::STOP_TRAVERSAL)
         ;
 
         $this->visitors[1]

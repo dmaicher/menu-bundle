@@ -8,6 +8,12 @@ use Symfony\Component\Security\Core\User\InMemoryUser;
 
 class FunctionalTest extends WebTestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        restore_exception_handler();
+    }
+
     public function testRenderMenuWithUserFoo(): void
     {
         $client = $this->createClient();
