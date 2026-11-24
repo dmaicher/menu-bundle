@@ -15,9 +15,9 @@ jobs:
                 -   php: 8.2
                     SYMFONY_REQUIRE: 6.4.*
                 -   php: 8.4
-                    SYMFONY_REQUIRE: 7.3.*
+                    SYMFONY_REQUIRE: 7.4.*
                 -   php: 8.5
-                    SYMFONY_REQUIRE: 8.0.*
+                    SYMFONY_REQUIRE: 8.1.*
                 -   php: 8.6
 
         steps:
@@ -32,9 +32,6 @@ jobs:
         -   name: Configure Composer minimum stability
             if: matrix.stability
             run: composer config minimum-stability ${{ matrix.stability }}
-
-        -   name: Remove cs fixer
-            run: composer remove --dev friendsofphp/php-cs-fixer --no-update
         
         -   name: Install symfony/flex
             run: | 
