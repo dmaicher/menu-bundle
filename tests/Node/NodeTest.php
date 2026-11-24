@@ -4,6 +4,7 @@ namespace Tests\Node;
 
 use DAMA\MenuBundle\Node\Node;
 use DAMA\MenuBundle\Node\NodeFactory;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
 class NodeTest extends TestCase
@@ -128,10 +129,8 @@ class NodeTest extends TestCase
         $this->assertSame($child2, $node->getFirstChildWithRoute());
     }
 
-    /**
-     * @testWith [true]
-     *           [false]
-     */
+    #[TestWith([true])]
+    #[TestWith([false])]
     public function testAddConditionalChildNode(bool $condition): void
     {
         $node = (new NodeFactory())->create('foo');

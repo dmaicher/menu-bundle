@@ -18,6 +18,7 @@ jobs:
                     SYMFONY_REQUIRE: 7.3.*
                 -   php: 8.5
                     SYMFONY_REQUIRE: 8.0.*
+                -   php: 8.6
 
         steps:
         -   uses: actions/checkout@v2
