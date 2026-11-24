@@ -54,7 +54,7 @@ final class MenuCompilerPass implements CompilerPassInterface
         $container->getParameterBag()->remove('dama.menu.config');
     }
 
-    protected function getReferenceFromConfigValue(ContainerBuilder $container, string $prefix, string $value): Reference
+    private function getReferenceFromConfigValue(ContainerBuilder $container, string $prefix, string $value): Reference
     {
         if (class_exists($value) && !$container->has($value)) {
             $id = $prefix.md5($value);

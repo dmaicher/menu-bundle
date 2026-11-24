@@ -3,6 +3,8 @@
          colors="true"
          failOnWarning="true"
          failOnRisky="true"
+         failOnDeprecation="true"
+         failOnPhpunitDeprecation="true"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          displayDetailsOnAllIssues="true"
 >
@@ -12,7 +14,7 @@
         </testsuite>
     </testsuites>
 
-    <source ignoreSuppressionOfDeprecations="true">
+    <source ignoreSuppressionOfDeprecations="true" ignoreSuppressionOfPhpDeprecations="true">
         <include>
             <directory>src</directory>
         </include>
