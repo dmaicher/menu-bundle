@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "symfony/framework-bundle": "^7.4 || ^8.1",
         "symfony/twig-bundle": "^7.4 || ^8.1",
-        "twig/twig": "^2.4.4 || ^3.0"
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.88.2",
