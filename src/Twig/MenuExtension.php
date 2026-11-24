@@ -15,9 +15,4 @@ final class MenuExtension extends AbstractExtension
             new TwigFunction('dama_menu_first_active_child', [MenuRuntime::class, 'getFirstActiveChild']),
         ];
     }
-
-    public function getName(): string
-    {
-        return 'dama_menu_extension';
-    }
 }

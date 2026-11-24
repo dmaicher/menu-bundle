@@ -258,10 +258,8 @@ class Node
 
     /**
      * @return $this
-     *
-     * @phpstan-ignore-next-line
      */
-    public function setAttr(string $key, $value): self
+    public function setAttr(string $key, mixed $value): self
     {
         $this->attr[$key] = $value;
 

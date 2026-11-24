@@ -66,7 +66,6 @@ return function (ContainerConfigurator $container): void {
 
     $container->services()
         ->set('dama_menu.node_visitor.node_route_propagator', NodeRoutePropagator::class)
-        ->arg(0, new Reference('request_stack'))
         ->tag('dama_menu.node_visitor', [
             'priority' => 1,
         ])

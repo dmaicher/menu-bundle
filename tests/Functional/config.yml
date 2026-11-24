@@ -10,8 +10,13 @@ framework:
     router: { resource: "%kernel.project_dir%/routing.yml", utf8: true }
     test: ~
     http_method_override: false
+    session:
+        storage_factory_id: session.storage.factory.mock_file
 
 security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\InMemoryUser: plain
+
     providers:
         in_memory:
             memory:

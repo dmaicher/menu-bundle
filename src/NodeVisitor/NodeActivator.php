@@ -10,11 +10,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class NodeActivator implements NodeVisitorInterface
 {
-    private RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
+    public function __construct(
+        private readonly RequestStack $requestStack,
+    ) {
     }
 
     public function visit(Node $node): void

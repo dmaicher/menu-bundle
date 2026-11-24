@@ -11,26 +11,11 @@ use Twig\TemplateWrapper;
 
 final class MenuRuntime implements RuntimeExtensionInterface
 {
-    /**
-     * @var Environment
-     */
-    private $twig;
-
-    /**
-     * @var MenuFactory
-     */
-    private $menuFactory;
-
-    /**
-     * @var MenuConfigProvider
-     */
-    private $menuConfigProvider;
-
-    public function __construct(Environment $twig, MenuFactory $menuFactory, MenuConfigProvider $menuConfigProvider)
-    {
-        $this->twig = $twig;
-        $this->menuFactory = $menuFactory;
-        $this->menuConfigProvider = $menuConfigProvider;
+    public function __construct(
+        private readonly Environment $twig,
+        private readonly MenuFactory $menuFactory,
+        private readonly MenuConfigProvider $menuConfigProvider,
+    ) {
     }
 
     /**

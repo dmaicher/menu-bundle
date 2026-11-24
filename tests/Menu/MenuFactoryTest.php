@@ -37,10 +37,7 @@ class MenuFactoryTest extends TestCase
 
     public function testCreate(): void
     {
-        $node = $this->getMockBuilder(Node::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $node = $this->createStub(Node::class);
 
         $this->nodeFactory
             ->expects($this->once())

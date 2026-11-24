@@ -6,7 +6,7 @@ test: clear_cache
 	vendor/bin/phpunit
 
 phpstan:
-	vendor/bin/phpstan analyse -c phpstan.neon -l max src/
+	vendor/bin/phpstan analyse -l max src/
 
 php_cs_fixer_fix:
 	vendor/bin/php-cs-fixer fix --config .php-cs-fixer.php src tests

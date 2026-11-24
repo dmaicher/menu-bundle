@@ -10,7 +10,7 @@ final class MenuTreeTraverser implements MenuTreeTraverserInterface
     /**
      * @var NodeVisitorInterface[]
      */
-    private $visitors = [];
+    private array $visitors = [];
 
     public function traverse(Node $node): void
     {
