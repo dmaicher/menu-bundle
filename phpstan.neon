@@ -1,4 +1,0 @@
-parameters:
-    reportUnmatchedIgnoredErrors: false
-    ignoreErrors:
-        - '#TreeBuilder does not have a constructor#'

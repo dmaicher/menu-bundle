@@ -11,24 +11,14 @@ use DAMA\MenuBundle\Node\NodeFactoryInterface;
 final class MenuFactory implements MenuFactoryInterface
 {
     /**
-     * @var MenuConfigProvider
-     */
-    private $menuConfigProvider;
-
-    /**
-     * @var MenuTreeTraverserInterface
-     */
-    private $menuTreeTraverser;
-
-    /**
      * @var array<string, Node>
      */
-    private $cache = [];
+    private array $cache = [];
 
-    public function __construct(MenuConfigProvider $menuConfigProvider, MenuTreeTraverserInterface $menuTreeTraverser)
-    {
-        $this->menuConfigProvider = $menuConfigProvider;
-        $this->menuTreeTraverser = $menuTreeTraverser;
+    public function __construct(
+        private readonly MenuConfigProvider $menuConfigProvider,
+        private readonly MenuTreeTraverserInterface $menuTreeTraverser,
+    ) {
     }
 
     public function create(string $name): Node

@@ -12,22 +12,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 final class NodeFilter implements NodeVisitorInterface
 {
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    private $authChecker;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authChecker,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly AuthorizationCheckerInterface $authChecker,
     ) {
-        $this->tokenStorage = $tokenStorage;
-        $this->authChecker = $authChecker;
     }
 
     public function visit(Node $node)

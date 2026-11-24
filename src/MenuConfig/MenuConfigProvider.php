@@ -7,7 +7,7 @@ final class MenuConfigProvider
     /**
      * @var array<string, array<string, mixed>>
      */
-    private $configs = [];
+    private array $configs = [];
 
     /**
      * @param array<string, mixed> $config
